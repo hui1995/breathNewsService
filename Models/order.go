@@ -1,6 +1,8 @@
 package Models
 
-import "time"
+import (
+	"github.com/jinzhu/gorm"
+)
 
 /**
  * @Author: hui
@@ -11,13 +13,17 @@ import "time"
  * @Date: 2020/2/25 12:43 PM
  */
 
- type Order struct {
- 	Id int
- 	UserId int
- 	ProductId int
- 	createTime time.Time
- 	State int
- 	UpdateTime time.Time
- 	OptionUserId int
+type Order struct {
+	gorm.Model
+	UserId       int
+	ProductId    int
+	State        int
+	OptionUserId int
+}
 
- }
+//func init() {
+//	table := Mysql.DB.HasTable(Order{})
+//	if !table {
+//		Mysql.DB.CreateTable(Order{})
+//	}
+//}
