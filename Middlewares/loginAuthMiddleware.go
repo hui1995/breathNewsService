@@ -1,4 +1,4 @@
-package Sessions
+package Middlewares
 
 import (
 	"errors"
@@ -9,23 +9,14 @@ import (
 	"time"
 )
 
-//var Store = cookie.NewStore([]byte("very-very-secret"))
-
-//func SetSession(c *gin.Context, username string) string {
-//	session := sessions.Default(c)
-//	sessionId := "sessionIdxxxxxxxok"
-//	session.Set(sessionId, username)
-//	session.Save()
-//	return sessionId
-//}
-//
-//func GetSession(c *gin.Context, sessionId string) (username string) {
-//	session := sessions.Default(c)
-//	result := session.Get(sessionId)
-//	username = result.(string)
-//	return
-//}
-
+/**
+ * @Author: hui
+ * @Email: breathcoder@gmail.com
+ * @Description:
+ * @WebSite : https://www.breathcoder.cn
+ * @Version: 1.0.0
+ * @Date: 2020/2/27 9:32 PM
+ */
 func LoginAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.Request.Header.Get("token")
