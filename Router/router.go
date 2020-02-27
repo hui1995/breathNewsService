@@ -16,7 +16,8 @@ func InitRouter() {
 	//router.Use(sessions.Sessions("myyyyysession", Sessions.Store))
 	//v1 := router.Group("v1")
 	//{
-	router.GET("/article", Controllers.ArticleDetail)
+	router.GET("/article/:id", Controllers.ArticleDetail)
+	router.GET("/channel", Controllers.ArticleList)
 	//}
 
 	router.Run(":8080")
