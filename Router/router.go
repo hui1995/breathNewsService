@@ -20,5 +20,5 @@ func InitRouter() {
 	router.GET("/channel", Controllers.ArticleList)
 	//}
 
-	router.Run(":8080")
+	router.Run(":80")
 }
