@@ -1,6 +1,7 @@
 package Models
 
 import (
+	"breathNewsService/Databases/Mysql"
 	"github.com/jinzhu/gorm"
 )
 
@@ -28,3 +29,8 @@ type Rank struct {
 //		Mysql.DB.CreateTable(Rank{})
 //	}
 //}
+func (this *Rank) GetRank() []Rank {
+	var ranks []Rank
+	Mysql.DB.Find(&ranks)
+	return ranks
+}

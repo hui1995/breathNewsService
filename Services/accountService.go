@@ -1,0 +1,85 @@
+package Services
+
+import (
+	"breathNewsService/Controllers/Response"
+	"breathNewsService/Models"
+	jwtgo "github.com/dgrijalva/jwt-go"
+
+	myjwt "breathNewsService/Middlewares"
+	"breathNewsService/utils"
+	"log"
+
+	"time"
+)
+
+/**
+ * @Author: hui
+ * @Email: breathcoder@gmail.com
+ * @Description:
+ * @WebSite : https://www.breathcoder.cn
+ * @Version: 1.0.0
+ * @Date: 2020/3/5 3:51 PM
+ */
+
+func generateToken(user Models.User) (string, error) {
+	j := &myjwt.JWT{
+		[]byte("NamelyThinking"),
+	}
+	claims := myjwt.CustomClaims{
+		user.RealNum,
+		user.UserName,
+		user.Phone,
+		true,
+		jwtgo.StandardClaims{
+			NotBefore: int64(time.Now().Unix() - 1000),   // 签名生效时间
+			ExpiresAt: int64(time.Now().Unix() + 360000), // 过期时间 一小时
+			Issuer:    "breathCoder",                     //签名的发行者
+		},
+	}
+
+	token, err := j.CreateToken(claims)
+
+	if err != nil {
+
+		return "", err
+	}
+
+	log.Println(token)
+
+	return token, nil
+}
+
+func CheckLogin(phone, password string) (int, *Response.AccountResponse) {
+
+	var userModel Models.User
+	user, err := userModel.FindByPhone(phone)
+	if err != nil {
+		return 0, nil
+
+	} else {
+
+		if user.Status != 0 && user.Status != 1 {
+			return -1, nil
+		}
+
+		if utils.MD5(password) != user.Password {
+			return -2, nil
+		}
+		var accountResponse Response.AccountResponse
+		accountResponse.UserName = user.UserName
+		accountResponse.Money = user.Money
+		accountResponse.ActiveMoney = user.ActiveMoney
+		accountResponse.FreezeMoney = user.FreezeMoney
+		accountResponse.RealNum = user.RealNum
+
+		token, err := generateToken(*user)
+		if err != nil {
+			return -4, nil
+		}
+		accountResponse.Token = token
+
+		return 1, &accountResponse
+
+	}
+
+}

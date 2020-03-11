@@ -26,7 +26,7 @@ func init() {
 	}
 }
 
-func (this *Article) FindById(id int) (*Article, error) {
+func (this *Article) FindById(id uint) (*Article, error) {
 	var article Article
 	err := Mysql.DB.Where("id = ?", id).First(&article).Error
 	if err != nil {
@@ -38,14 +38,19 @@ func (this *Article) FindById(id int) (*Article, error) {
 	return &article, nil
 }
 
+func (this *Article) FindByChannel(channelId, page, PageSize int) (artilelst []Article) {
+	Db := Mysql.DB
 
-func(this *Article) FindByChannel(channelId,page,PageSize int)([]Article){
-	artilelst := make([]Article, 0)
-	Db:=Mysql.DB
-	if channelId!=0{
-		Db=Db.Where("channel = ?",channelId)
+	if channelId != 0 {
+		Db = Db.Where("channel = ?", channelId)
 	}
-	Db=Db.Limit(PageSize).Offset((page-1)*PageSize).Find(&artilelst)
+	if page == 0 {
+		page = 1
+	}
+	if PageSize == 0 {
+		PageSize = 10
+	}
+	Db = Db.Limit(PageSize).Offset((page - 1) * PageSize).Order("id desc").Find(&artilelst)
 
 	return artilelst
 

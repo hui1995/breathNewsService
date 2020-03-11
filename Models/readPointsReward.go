@@ -1,6 +1,7 @@
 package Models
 
 import (
+	"breathNewsService/Databases/Mysql"
 	"github.com/jinzhu/gorm"
 )
 
@@ -28,3 +29,17 @@ type ReadPointsReward struct {
 //		Mysql.DB.CreateTable(ReadPointsReward{})
 //	}
 //}
+//
+
+//根据积分查询概率
+
+func (this *ReadPointsReward) FindByPoints(points int) ReadPointsReward {
+
+	db := Mysql.DB
+	var readPointsReward ReadPointsReward
+	readPointsReward.Points = points
+	db.Where(&ReadPointsReward{Points: points}).First(&readPointsReward)
+
+	return readPointsReward
+
+}

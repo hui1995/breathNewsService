@@ -2,6 +2,7 @@ package Middlewares
 
 import (
 	"errors"
+	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -17,6 +18,27 @@ import (
  * @Version: 1.0.0
  * @Date: 2020/2/27 9:32 PM
  */
+func GetUserId() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		token := c.Request.Header.Get("token")
+		if token == "" {
+
+			return
+		}
+
+		j := NewJWT()
+		claims, err := j.ParseToken(token)
+		if err == nil {
+			c.Set("userId", claims.ID)
+			fmt.Println(claims.ID)
+
+		} else {
+			c.Set("userId", 0)
+
+		}
+	}
+}
+
 func LoginAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.Request.Header.Get("token")
@@ -31,7 +53,7 @@ func LoginAuth() gin.HandlerFunc {
 		log.Println("get token: ", token)
 
 		j := NewJWT()
-		claims, err := j.parseToken(token)
+		claims, err := j.ParseToken(token)
 		if err != nil {
 
 			if err == TokenExpired {
@@ -50,7 +72,7 @@ func LoginAuth() gin.HandlerFunc {
 			return
 
 		}
-		c.Set("claims", claims)
+		c.Set("userId", claims.ID)
 
 	}
 }
@@ -68,9 +90,10 @@ var (
 )
 
 type CustomClaims struct {
-	ID    string `json:"userId"`
-	Name  string `json:"name"`
-	Phone string `json:"phone"`
+	ID      int    `json:"userId"`
+	Name    string `json:"name"`
+	Phone   string `json:"phone"`
+	IsVaild bool   `json:"is_vaild"`
 	jwt.StandardClaims
 }
 
@@ -88,17 +111,18 @@ func SetSignKey(key string) string {
 	return SignKey
 }
 
-func (j *JWT) createToken(claims CustomClaims) (string, error) {
+func (j *JWT) CreateToken(claims CustomClaims) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(j.SigingKey)
 }
 
-func (j *JWT) parseToken(tokenString string) (*CustomClaims, error) {
+func (j *JWT) ParseToken(tokenString string) (*CustomClaims, error) {
 	token, err := jwt.ParseWithClaims(tokenString, &CustomClaims{}, func(token *jwt.Token) (interface{}, error) {
 		return j.SigingKey, nil
 	})
+
 	if err != nil {
-		if ve, ok := err.(*jwt.ValidationError); ok {
+		if ve, ok := err.(*jwt.ValidationError); !ok {
 			if ve.Errors&jwt.ValidationErrorMalformed != 0 {
 				return nil, TokenMalformed
 			} else if ve.Errors&jwt.ValidationErrorExpired != 0 {
@@ -111,7 +135,7 @@ func (j *JWT) parseToken(tokenString string) (*CustomClaims, error) {
 			}
 		}
 	}
-	if claims, ok := token.Claims.(*CustomClaims); ok && token.Valid {
+	if claims, ok := token.Claims.(*CustomClaims); ok && !token.Valid {
 		return claims, nil
 	}
 	return nil, TokenInvalid
@@ -130,7 +154,7 @@ func (j *JWT) RefreshToken(tokenString string) (string, error) {
 	if claims, ok := token.Claims.(*CustomClaims); ok && token.Valid {
 		jwt.TimeFunc = time.Now
 		claims.StandardClaims.ExpiresAt = time.Now().Add(1 * time.Hour).Unix()
-		return j.createToken(*claims)
+		return j.CreateToken(*claims)
 	}
 	return "", TokenInvalid
 }

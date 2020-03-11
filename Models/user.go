@@ -1,6 +1,7 @@
 package Models
 
 import (
+	"breathNewsService/Databases/Mysql"
 	"github.com/jinzhu/gorm"
 )
 
@@ -15,15 +16,16 @@ import (
 type User struct {
 	gorm.Model
 
-	UserName string
-	RealName string
-	Password string
-	Phone    string
-	Alipay   string
-
+	UserName    string
+	RealNum     int
+	RealName    string
+	Password    string
+	Phone       string
+	Alipay      string
 	Money       float64
 	FreezeMoney float64
 	ActiveMoney float64
+	Status      int
 }
 
 //func init() {
@@ -32,3 +34,14 @@ type User struct {
 //		Mysql.DB.CreateTable(User{})
 //	}
 //}
+
+func (this *User) FindByPhone(phone string) (*User, error) {
+
+	var User User
+	err := Mysql.DB.Where("phone = ?", phone).First(&User).Error
+	if err != nil {
+		return nil, err
+	}
+	return &User, nil
+
+}

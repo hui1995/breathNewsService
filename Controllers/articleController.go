@@ -1,7 +1,7 @@
 package Controllers
 
 import (
-	"breathNewsService/Models"
+	"breathNewsService/Services"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -11,44 +11,59 @@ import (
 /**
  * @Author: hui
  * @Email: breathcoder@gmail.com
- * @Description:
- * @WebSite : https://www.breathcoder.cn
+ * @Description: * @WebSite : https://www.breathcoder.cn
  * @Version: 1.0.0
  * @Date: 2020/2/27 2:55 PM
  */
 
+/**
+获取详情
+*/
+
 func ArticleDetail(c *gin.Context) {
+	id := c.Param("id")
 
-	var articleModel Models.Article
-	id:=c.Param("id")
+	idInt, _ := strconv.Atoi(id)
 
-	idInt,_:=strconv.Atoi(id)
-
-	article, err := articleModel.FindById(idInt)
-	c.JSON(http.StatusOK, gin.H{
-		"code":    -1,
-		"message": err,
-		"data":    &article,
-	})
-
-
-
-}
-func ArticleList(c *gin.Context){
-	page,_ :=strconv.Atoi(c.Query("page"))
-	pageSize,_:=strconv.Atoi(c.Query("pageSize"))
-	fmt.Println(page)
-	fmt.Println(pageSize)
-	var channelInt int;
-	channelInt=0
-	if channel,isExist :=c.GetQuery("channel");isExist==true{
-		channelInt,_=strconv.Atoi(channel)
+	article, err := Services.GetArticleDeatil(uint(idInt))
+	if err == nil {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    1,
+			"message": "获取成功",
+			"data":    &article,
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    0,
+			"message": err,
+		})
 
 	}
-	var articleModel Models.Article
-	articlelst:=articleModel.FindByChannel(channelInt,page,pageSize)
+
+}
+
+/**
+获取列表
+*/
+func ArticleList(c *gin.Context) {
+
+	userID := c.GetInt("userId")
+
+	fmt.Println(userID)
+
+	//
+	page, _ := strconv.Atoi(c.Query("page"))
+	pageSize, _ := strconv.Atoi(c.Query("pageSize"))
+
+	var channelInt int
+	channelInt = 0
+	if channel, isExist := c.GetQuery("channel"); isExist == true {
+		channelInt, _ = strconv.Atoi(channel)
+
+	}
+	articlelst := Services.GetHomeArticleList(channelInt, page, pageSize, userID)
 	c.JSON(http.StatusOK, gin.H{
-		"code":    -1,
+		"code":    1,
 		"message": "获取成功",
 		"data":    articlelst,
 	})
