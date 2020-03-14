@@ -37,10 +37,11 @@ type ConfigInfo struct {
 	Ads      []string
 	Limit    int
 	Interval int
-	userId   int
+	UserId   int
+	Points   int
 }
 
-func FirstRegister(devideId string, platform string, manufacturer string, model string) int {
+func FirstRegister(devideId string, platform string, manufacturer string, model string, points int) int {
 	var devideInfo Models.DevideInfo
 	var user Models.User
 	var userPoints Models.UserPoints
@@ -49,7 +50,7 @@ func FirstRegister(devideId string, platform string, manufacturer string, model 
 		realId = realId + 1
 		user.InsertInfo(realId, 0, "用户"+strconv.Itoa(realId))
 		devideInfo.InsertInfo(realId, devideId, platform, manufacturer, model)
-		userPoints.InsertInfo(realId, 66)
+		userPoints.InsertInfo(realId, points)
 		return realId - 100000
 
 	}
@@ -62,10 +63,12 @@ func CheckPlatform(devideId string, platform string, manufacturer string, model 
 	var configInfo ConfigInfo
 
 	//第一次注册获取注册信息
+	points := 66
 
-	userId := FirstRegister(devideId, platform, manufacturer, model)
+	userId := FirstRegister(devideId, platform, manufacturer, model, points)
 	if userId != 0 {
-		configInfo.userId = userId
+		configInfo.UserId = userId
+		configInfo.Points = points
 	}
 	value := commconfig.FindByGroupAndKey("platform", "version")
 	var platforms []PlatformConfig
