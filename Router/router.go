@@ -27,5 +27,5 @@ func InitRouter() {
 
 	}
 
-	router.Run(":80")
+	router.Run(":8080")
 }
