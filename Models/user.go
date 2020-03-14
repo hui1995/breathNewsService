@@ -45,3 +45,17 @@ func (this *User) FindByPhone(phone string) (*User, error) {
 	return &User, nil
 
 }
+func (this *User) FindLastUser() int {
+	var user User
+	Mysql.DB.Last(&user)
+
+	return user.RealNum
+}
+
+func (this *User) InsertInfo(realNum int, status int, userName string) bool {
+	user := User{UserName: userName, RealNum: realNum, Status: status}
+
+	Mysql.DB.Create(&user)
+	return true
+
+}

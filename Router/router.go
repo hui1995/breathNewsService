@@ -17,7 +17,7 @@ func InitRouter() {
 	// 使用 session(cookie-based)
 	router.POST("/login/check", Controllers.Login)
 	router.GET("home/channel", Controllers.ArticleList)
-	router.GET("check/platform", Controllers.GetPlatformVersion)
+	router.POST("load/config", Controllers.LoadsConfig)
 
 	v1 := router.Group("/api")
 	v1.Use(Middlewares.LoginAuth())

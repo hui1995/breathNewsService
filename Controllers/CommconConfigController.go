@@ -1,6 +1,7 @@
 package Controllers
 
 import (
+	"breathNewsService/Controllers/Request"
 	"breathNewsService/Services"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -16,12 +17,17 @@ import (
 
 
  */
-func GetPlatformVersion(c *gin.Context) {
-	platform := c.Query("platform")
+func LoadsConfig(c *gin.Context) {
+	var request Request.DevideInfoRequest
 
-	isOpen := Services.CheckPlatform(platform)
+	if c.BindJSON(&request) == nil {
 
-	c.JSON(http.StatusOK,
-		gin.H{"code": 1, "isOpen": isOpen})
+		config := Services.CheckPlatform(request.DevideId, request.Platform, request.Manufacturer, request.Model)
+		c.JSON(http.StatusOK,
+			gin.H{"code": 1, "data": config})
+	} else {
+		c.JSON(http.StatusOK,
+			gin.H{"code": 1, "message": "参数错误"})
+	}
 
 }

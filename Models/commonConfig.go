@@ -14,12 +14,12 @@ type CommonConfig struct {
 	remark string
 }
 
-func init() {
-	table := Mysql.DB.HasTable(CommonConfig{})
-	if !table {
-		Mysql.DB.CreateTable(CommonConfig{})
-	}
-}
+//func init() {
+//	table := Mysql.DB.HasTable(CommonConfig{})
+//	if !table {
+//		Mysql.DB.CreateTable(CommonConfig{})
+//	}
+//}
 func (this *CommonConfig) FindByGroupAndKey(group, key string) string {
 
 	var commonConfig CommonConfig

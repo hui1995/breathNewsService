@@ -48,3 +48,10 @@ func (this *UserPoints) SubPoints(userId, points int) bool {
 	return true
 
 }
+func (this *UserPoints) InsertInfo(realNum, points int) bool {
+	user := UserPoints{UserId: realNum, Points: points}
+
+	Mysql.DB.Create(&user)
+	return true
+
+}
