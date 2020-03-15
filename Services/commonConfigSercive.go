@@ -39,6 +39,7 @@ type ConfigInfo struct {
 	Interval int
 	UserId   int
 	Points   int
+	Message  string
 }
 
 func FirstRegister(devideId string, platform string, manufacturer string, model string, points int) int {
@@ -66,10 +67,7 @@ func CheckPlatform(devideId string, platform string, manufacturer string, model 
 	points := 66
 
 	userId := FirstRegister(devideId, platform, manufacturer, model, points)
-	if userId != 0 {
-		configInfo.UserId = userId
-		configInfo.Points = points
-	}
+
 	value := commconfig.FindByGroupAndKey("platform", "version")
 	var platforms []PlatformConfig
 	err := json.Unmarshal([]byte(value), &platforms)
@@ -89,6 +87,17 @@ func CheckPlatform(devideId string, platform string, manufacturer string, model 
 		}
 
 	}
+	if userId != 0 {
+		configInfo.UserId = userId
+		configInfo.Points = points
+		if configInfo.IsOpen {
+			configInfo.Message = "欢迎您第" + strconv.Itoa(userId) + "位用户，首次注册，赠送您" + strconv.Itoa(points) + "J币"
+		} else {
+			configInfo.Message = "欢迎您第使用"
+
+		}
+	}
+
 	//loads ads platform config
 	value = commconfig.FindByGroupAndKey("platform", "ad")
 
