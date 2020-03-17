@@ -18,6 +18,7 @@ import (
 type articleHomeBean struct {
 	Id         uint
 	Title      string
+	Cover      string
 	AuthorName string
 	Like       int
 	Read       int
@@ -33,14 +34,14 @@ func GetArticleDeatil(id uint) (*Models.Article, error) {
 
 }
 
-func GetHomeArticleList(channel, page, PageSize, userId int) []articleHomeBean {
+func GetHomeArticleList(channel, userId int) []articleHomeBean {
 
 	var article Models.Article
 	var readConsumption Models.ReadConsumption
 	//查询文章列表，假如没登录，则全部锁定，如果登录了
 	var idList []interface{}
 
-	articlelist := article.FindByChannel(channel, page, PageSize)
+	articlelist := article.FindByChannel(channel)
 
 	//获取查看过的userId
 	if userId != 0 {
@@ -61,6 +62,7 @@ func GetHomeArticleList(channel, page, PageSize, userId int) []articleHomeBean {
 		articleHomebean1.Price = v.Price
 		articleHomebean1.CreateTime = v.CreatedAt
 		articleHomebean1.Id = v.ID
+		articleHomebean1.Cover = v.Cover
 		if utils.Contarins(v.ID, idList) {
 			articleHomebean1.IsRead = true
 		} else {

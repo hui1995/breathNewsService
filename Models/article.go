@@ -10,6 +10,7 @@ type Article struct {
 	Channel    int
 	Content    string
 	Title      string
+	Cover      string
 	AuthorId   int    `gorm:"column:author_id"`
 	AuthorName string `gorm:"column:author_name"`
 	SourceType int    `gorm:"column:source_type"`
@@ -38,19 +39,13 @@ func (this *Article) FindById(id uint) (*Article, error) {
 	return &article, nil
 }
 
-func (this *Article) FindByChannel(channelId, page, PageSize int) (artilelst []Article) {
+func (this *Article) FindByChannel(channelId int) (artilelst []Article) {
 	Db := Mysql.DB
 
 	if channelId != 0 {
 		Db = Db.Where("channel = ?", channelId)
 	}
-	if page == 0 {
-		page = 1
-	}
-	if PageSize == 0 {
-		PageSize = 10
-	}
-	Db = Db.Limit(PageSize).Offset((page - 1) * PageSize).Order("id desc").Find(&artilelst)
+	Db = Db.Order("RAND()").Limit(8).Find(&artilelst)
 
 	return artilelst
 

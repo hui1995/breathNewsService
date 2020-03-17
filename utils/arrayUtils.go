@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"reflect"
 )
 
@@ -20,9 +19,6 @@ func Contarins(val interface{}, array []interface{}) bool {
 	case reflect.Slice:
 		s := reflect.ValueOf(array)
 		for i := 0; i < s.Len(); i++ {
-			fmt.Println(reflect.TypeOf(s.Index(i).Interface()))
-			fmt.Println(reflect.TypeOf(val))
-			fmt.Println("----------")
 
 			if val == s.Index(i).Interface() {
 				return true

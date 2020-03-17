@@ -2,7 +2,6 @@ package Controllers
 
 import (
 	"breathNewsService/Services"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -49,19 +48,13 @@ func ArticleList(c *gin.Context) {
 
 	userID := c.GetInt("userId")
 
-	fmt.Println(userID)
-
-	//
-	page, _ := strconv.Atoi(c.Query("page"))
-	pageSize, _ := strconv.Atoi(c.Query("pageSize"))
-
 	var channelInt int
 	channelInt = 0
 	if channel, isExist := c.GetQuery("channel"); isExist == true {
 		channelInt, _ = strconv.Atoi(channel)
 
 	}
-	articlelst := Services.GetHomeArticleList(channelInt, page, pageSize, userID)
+	articlelst := Services.GetHomeArticleList(channelInt, userID)
 	c.JSON(http.StatusOK, gin.H{
 		"code":    1,
 		"message": "获取成功",

@@ -36,6 +36,17 @@ func (this *DevideInfo) IsExistByDevideId(devideId string) bool {
 	return true
 }
 
+func (this *DevideInfo) FindByDevideId(devideId string) (*DevideInfo, error) {
+
+	var devideInfo DevideInfo
+	err := Mysql.DB.Where("devide_id = ?", devideId).First(&devideInfo).Error
+	if err != nil {
+		return nil, err
+	}
+	return &devideInfo, nil
+
+}
+
 func (this *DevideInfo) InsertInfo(userId int, devideId string, platform string, manufacturer string, model string) bool {
 	var incomeRecord = DevideInfo{UserId: userId, DevideId: devideId, Platform: platform, Manufacturer: manufacturer, ModelM: model}
 	Mysql.DB.Create(&incomeRecord)
