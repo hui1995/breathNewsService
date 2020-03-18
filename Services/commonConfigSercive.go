@@ -162,7 +162,6 @@ func CheckPlatform(devideId string, platform string, manufacturer string, model 
 		for _, item := range adsConfig {
 
 			if item.Platform == platform {
-				fmt.Println(item.Ads)
 				configInfo.Ads = item.Ads
 
 			}

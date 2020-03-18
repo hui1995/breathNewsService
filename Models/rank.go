@@ -21,6 +21,7 @@ type Rank struct {
 	UserName string
 	IsRobot  int
 	Score    int
+	Position int
 }
 
 //func init() {
@@ -31,6 +32,12 @@ type Rank struct {
 //}
 func (this *Rank) GetRank() []Rank {
 	var ranks []Rank
-	Mysql.DB.Find(&ranks)
+	Mysql.DB.Order("position").Limit(10).Find(&ranks)
 	return ranks
+}
+
+func (this *Rank) GetCurrentRank(userId int) Rank {
+	var rank Rank
+	Mysql.DB.Where("user_id = ?", userId).First(&rank)
+	return rank
 }
