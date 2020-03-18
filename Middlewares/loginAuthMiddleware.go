@@ -2,7 +2,6 @@ package Middlewares
 
 import (
 	"errors"
-	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -30,7 +29,6 @@ func GetUserId() gin.HandlerFunc {
 		claims, err := j.ParseToken(token)
 		if err == nil {
 			c.Set("userId", claims.ID)
-			fmt.Println(claims.ID)
 
 		} else {
 			c.Set("userId", 0)

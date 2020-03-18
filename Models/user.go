@@ -45,6 +45,17 @@ func (this *User) FindByPhone(phone string) (*User, error) {
 	return &User, nil
 
 }
+
+func (this *User) FindByRealNum(realNum int) (*User, error) {
+
+	var User User
+	err := Mysql.DB.Where("real_num = ?", realNum).First(&User).Error
+	if err != nil {
+		return nil, err
+	}
+	return &User, nil
+
+}
 func (this *User) FindLastUser() int {
 	var user User
 	Mysql.DB.Last(&user)

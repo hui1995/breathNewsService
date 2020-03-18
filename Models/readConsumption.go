@@ -2,7 +2,6 @@ package Models
 
 import (
 	"breathNewsService/Databases/Mysql"
-	"fmt"
 	"github.com/jinzhu/gorm"
 	"time"
 )
@@ -44,7 +43,6 @@ func (this *ReadConsumption) ExistReadRecordByUserIdAndArticleId(userId int, art
 	Db := Mysql.DB
 	var count = 0
 	Db = Db.Model(&ReadConsumption{}).Where("user_id = ? AND article_id = ?", userId, articleId).Count(&count)
-	fmt.Println(count)
 	if count == 0 {
 		return false
 	}

@@ -24,6 +24,8 @@ func InitRouter() {
 	{
 		v1.GET("/article/:id", Controllers.ArticleDetail)
 		v1.GET("/auth/article/", Controllers.AuthPermissionArticle)
+		v1.GET("/rank/today/", Controllers.GetTodayRank)
+		v1.GET("/rank/yestoday/", Controllers.GetYestodayRank)
 
 	}
 

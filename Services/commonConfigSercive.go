@@ -4,7 +4,11 @@ import (
 	"breathNewsService/Models"
 	"encoding/json"
 	"fmt"
+	jwtgo "github.com/dgrijalva/jwt-go"
 	"strconv"
+
+	myjwt "breathNewsService/Middlewares"
+	"time"
 )
 
 /**
@@ -39,9 +43,38 @@ type ConfigInfo struct {
 	Interval int
 	UserId   int
 	Points   int
+	Message  string
+	IsFirst  bool
+	Token    string
 }
 
-func FirstRegister(devideId string, platform string, manufacturer string, model string, points int) int {
+func generateTokenByDevide(realNum int, username string, phone string) (string, error) {
+	j := &myjwt.JWT{
+		[]byte("NamelyThinking"),
+	}
+	claims := myjwt.CustomClaims{
+		realNum,
+		username,
+		phone,
+		true,
+		jwtgo.StandardClaims{
+			NotBefore: int64(time.Now().Unix() - 1000),    // 签名生效时间
+			ExpiresAt: int64(time.Now().Unix() + 3600000), // 过期时间 一小时
+			Issuer:    "breathCoder",                      //签名的发行者
+		},
+	}
+
+	token, err := j.CreateToken(claims)
+
+	if err != nil {
+
+		return "", err
+	}
+
+	return token, nil
+}
+
+func FirstRegister(devideId string, platform string, manufacturer string, model string, points int) (bool, int, string) {
 	var devideInfo Models.DevideInfo
 	var user Models.User
 	var userPoints Models.UserPoints
@@ -51,10 +84,26 @@ func FirstRegister(devideId string, platform string, manufacturer string, model 
 		user.InsertInfo(realId, 0, "用户"+strconv.Itoa(realId))
 		devideInfo.InsertInfo(realId, devideId, platform, manufacturer, model)
 		userPoints.InsertInfo(realId, points)
-		return realId - 100000
 
+		token, err := generateTokenByDevide(realId, "用户"+strconv.Itoa(realId), "")
+		if err == nil {
+			return true, realId, token
+		}
+		return true, realId, ""
+
+	} else {
+		info, err := devideInfo.FindByDevideId(devideId)
+		if err == nil {
+			realId := info.UserId
+			token, err := generateTokenByDevide(realId, "用户"+strconv.Itoa(realId), "")
+			if err == nil {
+				return false, realId, token
+			}
+			return false, realId, ""
+
+		}
 	}
-	return 0
+	return false, 0, ""
 }
 
 func CheckPlatform(devideId string, platform string, manufacturer string, model string) ConfigInfo {
@@ -65,11 +114,8 @@ func CheckPlatform(devideId string, platform string, manufacturer string, model 
 	//第一次注册获取注册信息
 	points := 66
 
-	userId := FirstRegister(devideId, platform, manufacturer, model, points)
-	if userId != 0 {
-		configInfo.UserId = userId
-		configInfo.Points = points
-	}
+	isFisrt, userId, token := FirstRegister(devideId, platform, manufacturer, model, points)
+
 	value := commconfig.FindByGroupAndKey("platform", "version")
 	var platforms []PlatformConfig
 	err := json.Unmarshal([]byte(value), &platforms)
@@ -79,6 +125,7 @@ func CheckPlatform(devideId string, platform string, manufacturer string, model 
 	}
 
 	configInfo.IsOpen = false
+	configInfo.Token = token
 
 	for _, item := range platforms {
 
@@ -89,6 +136,18 @@ func CheckPlatform(devideId string, platform string, manufacturer string, model 
 		}
 
 	}
+	if isFisrt {
+		configInfo.UserId = userId
+		configInfo.Points = points
+		configInfo.IsFirst = isFisrt
+		if configInfo.IsOpen {
+			configInfo.Message = "欢迎您第" + strconv.Itoa(userId) + "位用户，首次注册，赠送您" + strconv.Itoa(points) + "J币"
+		} else {
+			configInfo.Message = "欢迎您第使用"
+
+		}
+	}
+
 	//loads ads platform config
 	value = commconfig.FindByGroupAndKey("platform", "ad")
 
@@ -103,7 +162,6 @@ func CheckPlatform(devideId string, platform string, manufacturer string, model 
 		for _, item := range adsConfig {
 
 			if item.Platform == platform {
-				fmt.Println(item.Ads)
 				configInfo.Ads = item.Ads
 
 			}
