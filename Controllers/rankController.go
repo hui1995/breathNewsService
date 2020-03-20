@@ -2,9 +2,9 @@ package Controllers
 
 import (
 	"breathNewsService/Services"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 /**
@@ -16,40 +16,28 @@ import (
  * @Date: 2020/3/17 11:36 PM
  */
 func GetTodayRank(c *gin.Context) {
-
+	var rankTypeInt int
 	userID := c.GetInt("userId")
-	if userID <= 100000 {
-		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
-			"message": "该用户不存在",
+
+	if rankType, isExist := c.GetQuery("type"); isExist == true {
+		rankTypeInt, _ = strconv.Atoi(rankType)
+
+	} else {
+		rankTypeInt = 0
+	}
+	if rankTypeInt == 0 {
+		data := Services.GetTodayRank(userID)
+		c.HTML(http.StatusOK, "rank.html", gin.H{
+			"title": "今日榜单", "data": data,
 		})
-		return
+
+	} else {
+
+		data := Services.GetYesRank(userID)
+		c.HTML(http.StatusOK, "rank.html", gin.H{
+			"title": "昨日榜单", "data": data,
+		})
+
 	}
 
-}
-
-func GetYestodayRank(c *gin.Context) {
-
-	userID := c.GetInt("userId")
-	if userID <= 100000 {
-		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
-			"message": "该用户不存在",
-		})
-		return
-	}
-	data := Services.GetYesRank(userID)
-	c.JSON(http.StatusOK, gin.H{
-		"code":    1,
-		"data":    data,
-		"message": "success",
-	})
-
-}
-func TestH5(c *gin.Context) {
-	data := Services.GetTodayRank(888888)
-	fmt.Println(data)
-	c.HTML(http.StatusOK, "rank.html", gin.H{
-		"title": "今日榜单", "data": data,
-	})
 }

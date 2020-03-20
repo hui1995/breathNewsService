@@ -44,6 +44,10 @@ func GetTodayRank(userId int) []TodayInfo {
 		todayInfos = append(todayInfos, rankInfo)
 
 	}
+
+	if userId == 0 {
+		return todayInfos
+	}
 	myRank := rank.GetCurrentRank(userId)
 	if myRank.Position > 10 {
 		var todayInfo TodayInfo
@@ -83,6 +87,10 @@ func GetYesRank(userId int) []TodayInfo {
 		rankInfo2.Value = strconv.FormatFloat(v.Reward, 'g', 1, 64)
 		rankYess = append(rankYess, rankInfo2)
 
+	}
+
+	if userId == 0 {
+		return rankYess
 	}
 	if myyesRank.Position > 10 {
 		var rankYes TodayInfo
