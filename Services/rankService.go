@@ -60,6 +60,8 @@ func GetTodayRank(userId int) []TodayInfo {
 		}
 		todayInfo.IsMe = true
 
+		todayInfos = append(todayInfos, todayInfo)
+
 	}
 
 	return todayInfos
@@ -103,6 +105,7 @@ func GetYesRank(userId int) []TodayInfo {
 		}
 		rankYes.UserName = myyesRank.UserName
 		rankYes.Value = strconv.FormatFloat(myyesRank.Reward, 'g', 1, 64)
+		rankYess = append(rankYess, rankYes)
 
 	}
 

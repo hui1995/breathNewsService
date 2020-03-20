@@ -24,7 +24,7 @@
                     <div class="item-inner" style="color: #008577">
                         <div class="item-title">排名</div>
                         <div class="item-title">昵称</div>
-                        <div class="item-after"  style="color: #008577">指数</div>
+                        <div class="item-after"  style="color: #008577">{{.value}}</div>
                     </div>
                 </li>
 
@@ -44,7 +44,7 @@
                             <span class="icon icon-clock"></span>
 
                         </div>
-                        <div class="item-after"
+                        <div class="item-title"
                         {{if .IsMe }}
                              style="color: #008577"
                         {{end}}
