@@ -8,7 +8,7 @@ import (
 
 func InitRouter() {
 	router := gin.Default()
-	//router.LoadHTMLGlob("templates/**")
+	router.LoadHTMLGlob("templates/**")
 
 	// 要在路由组之前全局使用「跨域中间件」, 否则OPTIONS会返回404
 	router.Use(Middlewares.Cors())
@@ -18,6 +18,7 @@ func InitRouter() {
 	router.POST("/login/check", Controllers.Login)
 	router.GET("home/channel", Controllers.ArticleList)
 	router.POST("load/config", Controllers.LoadsConfig)
+	router.GET("test/", Controllers.TestH5)
 
 	v1 := router.Group("/api")
 	v1.Use(Middlewares.LoginAuth())

@@ -18,14 +18,7 @@ import (
 
 type TodayInfo struct {
 	UserName string
-	Score    int
-	Position string
-	IsMe     bool
-}
-
-type RankYes struct {
-	UserName string
-	Reward   float64
+	Value    string
 	Position string
 	IsMe     bool
 }
@@ -39,7 +32,7 @@ func GetTodayRank(userId int) []TodayInfo {
 	for _, v := range ranklist {
 		var rankInfo TodayInfo
 
-		rankInfo.Score = v.Score
+		rankInfo.Value = strconv.Itoa(v.Score)
 		if v.UserId == userId {
 			rankInfo.IsMe = true
 
@@ -55,7 +48,7 @@ func GetTodayRank(userId int) []TodayInfo {
 	if myRank.Position > 10 {
 		var todayInfo TodayInfo
 		todayInfo.UserName = myRank.UserName
-		todayInfo.Score = myRank.Score
+		todayInfo.Value = strconv.Itoa(myRank.Score)
 		if myRank.Position >= 100 {
 			todayInfo.Position = "未上榜"
 		} else {
@@ -68,16 +61,16 @@ func GetTodayRank(userId int) []TodayInfo {
 	return todayInfos
 }
 
-func GetYesRank(userId int) []RankYes {
+func GetYesRank(userId int) []TodayInfo {
 	var rankRecord Models.RankRecord
 
 	day := utils.TransDayInt(time.Now().Year(), int(time.Now().Month()), time.Now().Day()-1)
 	recordlst := rankRecord.GetYesRank(day)
 	myyesRank := rankRecord.GetCurrentRank(day, userId)
 
-	var rankYess []RankYes
+	var rankYess []TodayInfo
 	for _, v := range recordlst {
-		var rankInfo2 RankYes
+		var rankInfo2 TodayInfo
 		if v.UserId == userId {
 			rankInfo2.IsMe = true
 
@@ -87,12 +80,12 @@ func GetYesRank(userId int) []RankYes {
 		rankInfo2.Position = strconv.Itoa(v.Position)
 
 		rankInfo2.UserName = v.UserName
-		rankInfo2.Reward = v.Reward
+		rankInfo2.Value = strconv.FormatFloat(v.Reward, 'g', 1, 64)
 		rankYess = append(rankYess, rankInfo2)
 
 	}
 	if myyesRank.Position > 10 {
-		var rankYes RankYes
+		var rankYes TodayInfo
 		if myyesRank.Position >= 100 {
 			rankYes.Position = "未上榜"
 
@@ -101,7 +94,7 @@ func GetYesRank(userId int) []RankYes {
 
 		}
 		rankYes.UserName = myyesRank.UserName
-		rankYes.Reward = myyesRank.Reward
+		rankYes.Value = strconv.FormatFloat(myyesRank.Reward, 'g', 1, 64)
 
 	}
 
