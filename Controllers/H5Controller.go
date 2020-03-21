@@ -22,3 +22,7 @@ func Contractontroller(c *gin.Context) {
 
 	c.HTML(http.StatusOK, "contract.html", nil)
 }
+func RankHelpController(c *gin.Context) {
+
+	c.HTML(http.StatusOK, "rank_help.html", nil)
+}

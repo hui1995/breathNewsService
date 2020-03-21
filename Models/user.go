@@ -70,3 +70,24 @@ func (this *User) InsertInfo(realNum int, status int, userName string) bool {
 	return true
 
 }
+
+func (this *User) SelectByAliPay(alipay string) bool {
+	var count int
+	Mysql.DB.Model(&User{}).Where("alipay = ?", alipay).Count(&count)
+	if count > 2 {
+
+		return false
+
+	}
+
+	return true
+}
+
+// update aliipay
+func (this *User) UpdateAlipay(userId int, alipay, realName string) bool {
+	var user User
+	Mysql.DB.Where(&User{RealNum: userId}).First(&user)
+
+	Mysql.DB.Model(&user).Updates(User{Alipay: alipay, RealName: realName})
+	return true
+}

@@ -60,3 +60,40 @@ func Login(c *gin.Context) {
 	}
 
 }
+
+func UpdateAlipay(c *gin.Context) {
+	userID := c.GetInt("userId")
+
+	var request Request.AlipayRequest
+	if c.BindJSON(&request) == nil {
+
+		if Services.UpdateAliPay(userID, request.Alipay, request.RealName) {
+			c.JSON(http.StatusOK, gin.H{
+				"status": 1,
+				"msg":    "添加成功"})
+
+		} else {
+			c.JSON(http.StatusOK, gin.H{
+				"status": -1,
+				"msg":    "该账号绑定账号过多"})
+		}
+
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"status": -3,
+			"msg":    "参数错误"})
+		return
+	}
+
+}
+
+func UserInfoDetail(c *gin.Context) {
+
+	userID := c.GetInt("userId")
+	userInfo := Services.GetUserInfo(userID)
+	c.JSON(http.StatusOK, gin.H{
+		"status": 1,
+		"data":   userInfo,
+		"msg":    "获取成功"})
+
+}

@@ -1,0 +1,70 @@
+package Services
+
+import (
+	"breathNewsService/Models"
+	"encoding/json"
+	"fmt"
+)
+
+/**
+ * @Author: hui
+ * @Email: breathcoder@gmail.com
+ * @Description:
+ * @WebSite : https://www.breathcoder.cn
+ * @Version: 1.0.0
+ * @Date: 2020/3/21 8:47 PM
+ */
+
+type ResultProduct struct {
+	Money       float64
+	FreezeMoney float64
+	ActiveMoney float64
+	Alipay      string
+	RealName    string
+	Pricelist   []int
+}
+type ProductInfo struct {
+	Product int
+	Price   int
+}
+
+func FindProductInfo(userId int) ResultProduct {
+	var user Models.User
+	var config Models.CommonConfig
+	userInfo, err := user.FindByRealNum(userId)
+	var result ResultProduct
+	result.Money = userInfo.Money
+	result.FreezeMoney = userInfo.FreezeMoney
+	result.ActiveMoney = userInfo.ActiveMoney
+	result.Alipay = userInfo.Alipay
+	result.RealName = userInfo.RealName
+
+	value := config.FindByGroupAndKey("product", "price")
+	var productInfo []ProductInfo
+	err2 := json.Unmarshal([]byte(value), &productInfo)
+	if err2 != nil {
+		fmt.Printf("Unmarshal with error: %+v\n", err)
+
+	}
+	var pricelst []int
+
+	for _, v := range productInfo {
+		pricelst = append(pricelst, v.Price)
+
+	}
+	result.Pricelist = pricelst
+
+	return result
+
+}
+
+func AddOrderInfo(userId, price int) bool {
+	var order Models.Order
+
+	if order.FindeOrderByState(userId, 0) {
+		return order.InsertOrder(userId, price)
+
+	} else {
+		return false
+	}
+}

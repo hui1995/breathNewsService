@@ -1,6 +1,7 @@
 package Models
 
 import (
+	"breathNewsService/Databases/Mysql"
 	"github.com/jinzhu/gorm"
 )
 
@@ -16,9 +17,10 @@ import (
 type Order struct {
 	gorm.Model
 	UserId       int
-	ProductId    int
+	Price        int
 	State        int
 	OptionUserId int
+	Desction     string
 }
 
 //func init() {
@@ -27,3 +29,26 @@ type Order struct {
 //		Mysql.DB.CreateTable(Order{})
 //	}
 //}
+
+// update aliipay
+func (this *Order) InsertOrder(userId, Price int) bool {
+	order := Order{UserId: userId, Price: Price, State: 0, Desction: "待审核"}
+
+	Mysql.DB.Create(&order)
+	return true
+
+}
+
+func (this *Order) FindeOrderByState(userId, state int) bool {
+
+	var count int
+	Mysql.DB.Model(&Order{}).Where("user_id = ? and state = ?", userId, state).Count(&count)
+	if count == 0 {
+
+		return true
+
+	}
+
+	return false
+
+}

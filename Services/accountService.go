@@ -83,3 +83,32 @@ func CheckLogin(phone, password string) (int, *Response.AccountResponse) {
 	}
 
 }
+
+func UpdateAliPay(userId int, alipay, userName string) bool {
+
+	var user Models.User
+	if !user.SelectByAliPay(alipay) {
+		return false
+
+	}
+	return user.UpdateAlipay(userId, alipay, userName)
+}
+
+type UserInfo struct {
+	UserName string
+	Money    float64
+	Point    int
+}
+
+func GetUserInfo(userId int) UserInfo {
+	var user Models.User
+	var userPoint Models.UserPoints
+	userCurrent, _ := user.FindByRealNum(userId)
+	userPoint = userPoint.SelectPointsByUserId(userId)
+	var userInfo UserInfo
+	userInfo.Money = userCurrent.Money
+	userInfo.UserName = userCurrent.UserName
+	userInfo.Point = userPoint.Points
+	return userInfo
+
+}

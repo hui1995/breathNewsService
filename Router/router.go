@@ -21,6 +21,7 @@ func InitRouter() {
 	router.GET("/rank/", Controllers.GetTodayRank)
 	router.GET("/private/", Controllers.PrivateController)
 	router.GET("/contract/", Controllers.Contractontroller)
+	router.GET("/rankhelp", Controllers.RankHelpController)
 
 	v1 := router.Group("/api")
 	v1.Use(Middlewares.LoginAuth())
@@ -28,6 +29,10 @@ func InitRouter() {
 		v1.GET("/article/:id", Controllers.ArticleDetail)
 		v1.GET("/history/", Controllers.GetInComeRecord)
 		v1.GET("/auth/article/", Controllers.AuthPermissionArticle)
+		v1.GET("/product", Controllers.ProductController)
+		v1.GET("/order", Controllers.OrderProduct)
+		v1.POST("/alipay", Controllers.UpdateAlipay)
+		v1.GET("/userinfo", Controllers.UserInfoDetail)
 
 	}
 
