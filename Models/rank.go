@@ -32,7 +32,7 @@ type Rank struct {
 //}
 func (this *Rank) GetRank() []Rank {
 	var ranks []Rank
-	Mysql.DB.Order("position").Limit(10).Find(&ranks)
+	Mysql.DB.Order("position").Limit(100).Find(&ranks)
 	return ranks
 }
 

@@ -19,11 +19,14 @@ func InitRouter() {
 	router.GET("home/channel", Controllers.ArticleList)
 	router.POST("load/config", Controllers.LoadsConfig)
 	router.GET("/rank/", Controllers.GetTodayRank)
+	router.GET("/private/", Controllers.PrivateController)
+	router.GET("/contract/", Controllers.Contractontroller)
 
 	v1 := router.Group("/api")
 	v1.Use(Middlewares.LoginAuth())
 	{
 		v1.GET("/article/:id", Controllers.ArticleDetail)
+		v1.GET("/history/", Controllers.GetInComeRecord)
 		v1.GET("/auth/article/", Controllers.AuthPermissionArticle)
 
 	}

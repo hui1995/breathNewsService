@@ -9,9 +9,10 @@ import (
 
 type IncomeRecord struct {
 	gorm.Model
-	Type   int
-	Money  float64
-	userId int
+	Type    int
+	Money   float64
+	UserId  int
+	Message string
 }
 
 //func init() {
@@ -22,18 +23,18 @@ type IncomeRecord struct {
 //}
 
 func (this *IncomeRecord) Insert(type1 int, userId int, money float64) bool {
-	var incomeRecord = IncomeRecord{Type: type1, userId: userId, Money: money}
+	var incomeRecord = IncomeRecord{Type: type1, UserId: userId, Money: money}
 	Mysql.DB.Create(&incomeRecord)
 	return true
 
 }
 
 //获取记录
-func (this *IncomeRecord) FindByUser(userId, page, pageSize int) []IncomeRecord {
+func (this *IncomeRecord) FindByUser(userId int) []IncomeRecord {
 	incomeRecordlst := make([]IncomeRecord, 0)
 	Db := Mysql.DB
 
-	Db = Db.Limit(pageSize).Offset((page - 1) * pageSize).Order("id desc").Find(&incomeRecordlst)
+	Db = Db.Where("user_id = ?", userId).Order("id desc").Limit(30).Find(&incomeRecordlst)
 
 	return incomeRecordlst
 }

@@ -53,7 +53,7 @@ func GetTodayRank(userId int) []TodayInfo {
 		var todayInfo TodayInfo
 		todayInfo.UserName = myRank.UserName
 		todayInfo.Value = strconv.Itoa(myRank.Score)
-		if myRank.Position >= 100 {
+		if myRank.Position >= 1888 {
 			todayInfo.Position = "未上榜"
 		} else {
 			todayInfo.Position = strconv.Itoa(rank.Position)
@@ -96,7 +96,7 @@ func GetYesRank(userId int) []TodayInfo {
 	}
 	if myyesRank.Position > 10 {
 		var rankYes TodayInfo
-		if myyesRank.Position >= 100 {
+		if myyesRank.Position >= 1000 {
 			rankYes.Position = "未上榜"
 
 		} else {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{.title}}</title>
+    <title>历史收益</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -22,41 +22,28 @@
                 <li class="item-content">
                     <div class="item-media"><i class="icon icon-f7"></i></div>
                     <div class="item-inner" style="color: #008577">
-                        <div class="item-title">排名</div>
-                        <div class="item-title">昵称</div>
-                        <div class="item-after"  style="color: #008577">{{.value}}</div>
+                        <div class="item-title">金额</div>
+                        <div class="item-after">详情</div>
                     </div>
                 </li>
 
-                {{range .data}}
+            {{range .data}}
 
 
-                <li class="item-content"
-                {{if .IsMe }}
-                    style="color: #008577"
-{{end}}
-                >
+                <li class="item-content">
                     <div class="item-media"><i class="icon icon-f7"></i></div>
                     <div class="item-inner">
-                        <div class="item-title">{{.Position}}
-
-
+                        <div class="item-title">{{.Money}}
 
                         </div>
-                        <div class="item-title"
-                        {{if .IsMe }}
-                             style="color: #008577"
-                        {{end}}
-                        >{{.UserName}}</div>
+
                         <div class="item-after"
-                        {{if .IsMe }}
-                             style="color: #008577"
-                        {{end}}
-                        >{{ .Value }}</div>
+
+                        >{{ .Message }}</div>
                     </div>
                 </li>
 
-                        {{end}}
+            {{end}}
 
 
 
@@ -68,7 +55,6 @@
 
 <script src='https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js'></script>
 <script src='https://sui.ctolog.com/dist/js/sm.js'></script>
-<script src='https://sui.ctolog.com/dist/js/sm-extend.js'></script>
 
 </body>
 </html>
