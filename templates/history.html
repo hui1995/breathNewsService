@@ -5,56 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>历史收益</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="https://breathcoder.oss-cn-hangzhou.aliyuncs.com/aui.css" />
 
-    <link rel="stylesheet" href="https://sui.ctolog.com/dist/css/sm.min.css">
-    <link rel="stylesheet" href="https://sui.ctolog.com/dist/css/sm-extend.min.css">
 
 </head>
 <body>
 <div class="page-group" style="background-color: #FAFAFA">
-    <div class="page page-current" style="background-color: #FAFAFA">
-        <div class="content-block-title">{{.title}}</div>
-        <div class="list-block">
-            <ul>
-                <li class="item-content">
-                    <div class="item-media"><i class="icon icon-f7"></i></div>
-                    <div class="item-inner" style="color: #008577">
-                        <div class="item-title">金额</div>
-                        <div class="item-after">详情</div>
-                    </div>
-                </li>
-
-            {{range .data}}
+    <div class="aui-content aui-margin-b-15">
+        <ul class="aui-list aui-list-in">
 
 
-                <li class="item-content">
-                    <div class="item-media"><i class="icon icon-f7"></i></div>
-                    <div class="item-inner">
-                        <div class="item-title">{{.Money}}
-
+{{range .data}}
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+                    <div class="aui-info aui-margin-t-10 aui-padded-l-10 aui-padded-r-10">
+                        <div class="aui-info-item">
+                         <span class="aui-margin-l-5">{{.Money}}</span>
                         </div>
+                        <div class="aui-info-item">{{.Message }}</div>
+                    </div>                </div>
+            </li>
 
-                        <div class="item-after"
+        {{end}}
 
-                        >{{ .Message }}</div>
-                    </div>
-                </li>
-
-            {{end}}
-
-
-
-
-            </ul>
-        </div>
+        </ul>
     </div>
 </div>
 
-<script src='https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js'></script>
-<script src='https://sui.ctolog.com/dist/js/sm.js'></script>
+
 
 </body>
 </html>

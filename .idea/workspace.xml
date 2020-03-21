@@ -2,18 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28102a8a-cf85-4d44-a624-90f42dd7b8f3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Controllers/H5Controller.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Controllers/IncomeController.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/contract.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/history.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/private.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/aui.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/incomeRecord.go" beforeDir="false" afterPath="$PROJECT_DIR$/Models/incomeRecord.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/rank.go" beforeDir="false" afterPath="$PROJECT_DIR$/Models/rank.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Router/router.go" beforeDir="false" afterPath="$PROJECT_DIR$/Router/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/IncomRecordService.go" beforeDir="false" afterPath="$PROJECT_DIR$/Services/IncomRecordService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Services/rankService.go" beforeDir="false" afterPath="$PROJECT_DIR$/Services/rankService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/rank.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/rank.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/history.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/history.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/private.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/private.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,6 +31,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
+          <entry key="css" value="1" />
           <entry key="go" value="209" />
           <entry key="html" value="7" />
           <entry key="iml" value="1" />
@@ -48,6 +41,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
+          <entry key="CSS" value="1" />
           <entry key="Go" value="209" />
           <entry key="HTML" value="7" />
           <entry key="IDEA_MODULE" value="1" />
@@ -58,15 +52,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="go" value="8262" />
-          <entry key="html" value="238" />
-          <entry key="txt" value="67" />
+          <entry key="html" value="308" />
+          <entry key="txt" value="79" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Go" value="8262" />
-          <entry key="HTML" value="238" />
-          <entry key="PLAIN_TEXT" value="67" />
+          <entry key="HTML" value="308" />
+          <entry key="PLAIN_TEXT" value="79" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.go.postfix.template.usages.trigger">
@@ -105,27 +99,29 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/history.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
+            <state relative-caret-position="405">
+              <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/private.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+            <state relative-caret-position="165">
+              <caret line="11" lean-forward="true" selection-start-line="6" selection-start-column="2" selection-end-line="11" />
               <folding>
+                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#1103#1109#1#HTML" expanded="true" />
-                <element signature="e#1534#1540#1#HTML" expanded="true" />
-                <element signature="e#1988#1994#1#HTML" expanded="true" />
-                <element signature="e#2724#2730#1#HTML" expanded="true" />
-                <element signature="e#3389#3395#1#HTML" expanded="true" />
+                <element signature="e#1065#1071#1#HTML" expanded="true" />
+                <element signature="e#1496#1502#1#HTML" expanded="true" />
+                <element signature="e#1950#1956#1#HTML" expanded="true" />
+                <element signature="e#2686#2692#1#HTML" expanded="true" />
+                <element signature="e#3351#3357#1#HTML" expanded="true" />
                 <element signature="n#style#0;n#p#5;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
@@ -133,19 +129,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/test.html">
+        <entry file="file://$PROJECT_DIR$/static/css/aui.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
-              <folding>
-                <element signature="n#style#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#502#508#1#HTML" expanded="true" />
-                <element signature="e#933#939#1#HTML" expanded="true" />
-                <element signature="e#1387#1393#1#HTML" expanded="true" />
-                <element signature="e#2123#2129#1#HTML" expanded="true" />
-                <element signature="e#2788#2794#1#HTML" expanded="true" />
-                <element signature="n#style#0;n#p#5;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="90">
+              <caret line="6" column="9" lean-forward="true" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -162,20 +149,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Services/IncomRecordService.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Controllers/IncomeController.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
-              <folding>
-                <element signature="e#21#89#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="456">
+              <caret line="31" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
@@ -258,13 +233,13 @@
         <option value="$PROJECT_DIR$/Models/incomeRecord.go" />
         <option value="$PROJECT_DIR$/Controllers/IncomeController.go" />
         <option value="$PROJECT_DIR$/Router/router.go" />
-        <option value="$PROJECT_DIR$/templates/history.html" />
         <option value="$PROJECT_DIR$/Services/IncomRecordService.go" />
         <option value="$PROJECT_DIR$/templates/test.html" />
         <option value="$PROJECT_DIR$/Services/rankService.go" />
         <option value="$PROJECT_DIR$/Models/rank.go" />
         <option value="$PROJECT_DIR$/templates/rank.html" />
         <option value="$PROJECT_DIR$/templates/private.html" />
+        <option value="$PROJECT_DIR$/templates/history.html" />
       </list>
     </option>
   </component>
@@ -326,6 +301,11 @@
             <path>
               <item name="breathNewsService" type="b2602c69:ProjectViewProjectNode" />
               <item name="breathNewsService" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="breathNewsService" type="b2602c69:ProjectViewProjectNode" />
+              <item name="breathNewsService" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -353,6 +333,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/css" />
       <recent name="$PROJECT_DIR$/templates" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -454,7 +435,8 @@
     <MESSAGE value="资讯相关接口提交" />
     <MESSAGE value="排行榜单相关代码提交" />
     <MESSAGE value="等级相关细节修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="等级相关细节修改" />
+    <MESSAGE value="h5页面和历史榜单提交" />
+    <option name="LAST_COMMIT_MESSAGE" value="h5页面和历史榜单提交" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -468,13 +450,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///usr/local/go/src/runtime/asm_amd64.s">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="1356" selection-start-line="1356" selection-end-line="1356" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/go/src/runtime/signal_unix.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -748,8 +723,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Controllers/IncomeController.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="28" selection-start-line="20" selection-start-column="28" selection-end-line="20" selection-end-column="28" />
+        <state relative-caret-position="330">
+          <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
           <folding>
             <element signature="e#21#89#0" expanded="true" />
           </folding>
@@ -758,15 +733,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Services/IncomRecordService.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/history.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
+        <state relative-caret-position="456">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
@@ -774,22 +742,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="21" column="24" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
-          <folding>
-            <element signature="n#style#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#502#508#1#HTML" expanded="true" />
-            <element signature="e#933#939#1#HTML" expanded="true" />
-            <element signature="e#1387#1393#1#HTML" expanded="true" />
-            <element signature="e#2123#2129#1#HTML" expanded="true" />
-            <element signature="e#2788#2794#1#HTML" expanded="true" />
-            <element signature="n#style#0;n#p#5;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -821,19 +773,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#502#508#1#HTML" expanded="true" />
+            <element signature="e#933#939#1#HTML" expanded="true" />
+            <element signature="e#1387#1393#1#HTML" expanded="true" />
+            <element signature="e#2123#2129#1#HTML" expanded="true" />
+            <element signature="e#2788#2794#1#HTML" expanded="true" />
+            <element signature="n#style#0;n#p#5;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/css/aui.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="9" lean-forward="true" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/templates/private.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+        <state relative-caret-position="165">
+          <caret line="11" lean-forward="true" selection-start-line="6" selection-start-column="2" selection-end-line="11" />
           <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#p#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#1103#1109#1#HTML" expanded="true" />
-            <element signature="e#1534#1540#1#HTML" expanded="true" />
-            <element signature="e#1988#1994#1#HTML" expanded="true" />
-            <element signature="e#2724#2730#1#HTML" expanded="true" />
-            <element signature="e#3389#3395#1#HTML" expanded="true" />
+            <element signature="e#1065#1071#1#HTML" expanded="true" />
+            <element signature="e#1496#1502#1#HTML" expanded="true" />
+            <element signature="e#1950#1956#1#HTML" expanded="true" />
+            <element signature="e#2686#2692#1#HTML" expanded="true" />
+            <element signature="e#3351#3357#1#HTML" expanded="true" />
             <element signature="n#style#0;n#p#5;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/history.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="62" selection-start-line="27" selection-start-column="62" selection-end-line="27" selection-end-column="62" />
         </state>
       </provider>
     </entry>
