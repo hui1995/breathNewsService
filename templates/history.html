@@ -16,23 +16,23 @@
 <div class="page-group" style="background-color: #FAFAFA">
     <div class="aui-content aui-margin-b-15">
         <ul class="aui-list aui-list-in">
-            <div class="aui-info aui-margin-t-10 aui-padded-l-10 aui-padded-r-10">
-                <div class="aui-info-item">
-                    <img src="../../image/demo2.png" style="width:1.5rem" class="aui-img-round" /><span class="aui-margin-l-5">AUI</span>
-                </div>
-                <div class="aui-info-item">2015-07-13 22:31</div>
-            </div>
-
-
-{{range .data}}
             <li class="aui-list-item">
                 <div class="aui-list-item-inner">
-                    <div class="aui-info aui-margin-t-10 aui-padded-l-10 aui-padded-r-10">
-                        <div class="aui-info-item">
-                         <span class="aui-margin-l-5">{{.Money}}</span>
-                        </div>
-                        <div class="aui-info-item">{{.Message }}</div>
-                    </div>                </div>
+
+                    <div class="aui-list-item-title">金额</div>
+                    <div class="aui-list-item-right">详情</div>
+                </div>
+            </li>
+
+
+
+        {{range .data}}
+            <li class="aui-list-item">
+                <div class="aui-list-item-inner">
+
+                    <div class="aui-list-item-title">{{.Money}}</div>
+                    <div class="aui-list-item-right">{{.Message }}</div>
+                                </div>
             </li>
 
         {{end}}
