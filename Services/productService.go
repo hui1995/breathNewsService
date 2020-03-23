@@ -58,10 +58,15 @@ func FindProductInfo(userId int) ResultProduct {
 
 }
 
-func AddOrderInfo(userId, price int) bool {
+func AddOrderInfo(userId int, price float64) bool {
 	var order Models.Order
+	var user Models.User
+	userInfo, _ := user.FindByRealNum(userId)
+	freezeMoney := userInfo.FreezeMoney + price
+	activeMoney := userInfo.ActiveMoney - price
 
 	if order.FindeOrderByState(userId, 0) {
+		user.UpdateMoney(userId, userInfo.Money, freezeMoney, activeMoney)
 		return order.InsertOrder(userId, price)
 
 	} else {

@@ -17,7 +17,7 @@ import (
 type Order struct {
 	gorm.Model
 	UserId       int
-	Price        int
+	Price        float64
 	State        int
 	OptionUserId int
 	Desction     string
@@ -31,7 +31,7 @@ type Order struct {
 //}
 
 // update aliipay
-func (this *Order) InsertOrder(userId, Price int) bool {
+func (this *Order) InsertOrder(userId int, Price float64) bool {
 	order := Order{UserId: userId, Price: Price, State: 0, Desction: "待审核"}
 
 	Mysql.DB.Create(&order)

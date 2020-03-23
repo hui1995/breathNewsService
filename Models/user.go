@@ -91,3 +91,12 @@ func (this *User) UpdateAlipay(userId int, alipay, realName string) bool {
 	Mysql.DB.Model(&user).Updates(User{Alipay: alipay, RealName: realName})
 	return true
 }
+
+func (this *User) UpdateMoney(userId int, money, freezeMoney, activeMoney float64) bool {
+	var user User
+	Mysql.DB.Where(&User{RealNum: userId}).First(&user)
+
+	Mysql.DB.Model(&user).Updates(User{Money: money, FreezeMoney: freezeMoney, ActiveMoney: activeMoney})
+	return true
+
+}

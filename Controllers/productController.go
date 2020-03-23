@@ -30,7 +30,7 @@ func OrderProduct(c *gin.Context) {
 	userID := c.GetInt("userId")
 
 	price := c.Query("price")
-	priceInt, _ := strconv.Atoi(price)
+	priceInt, _ := strconv.ParseFloat(price, 64)
 
 	if Services.AddOrderInfo(userID, priceInt) {
 		c.JSON(http.StatusOK, gin.H{
