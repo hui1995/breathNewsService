@@ -33,6 +33,7 @@ func InitRouter() {
 		v1.GET("/order", Controllers.OrderProduct)
 		v1.POST("/alipay", Controllers.UpdateAlipay)
 		v1.GET("/userinfo", Controllers.UserInfoDetail)
+		v1.GET("/orderlst", Controllers.OrderList)
 
 	}
 

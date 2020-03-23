@@ -39,6 +39,7 @@ func FindProductInfo(userId int) ResultProduct {
 	result.ActiveMoney = userInfo.ActiveMoney
 	result.Alipay = userInfo.Alipay
 	result.RealName = userInfo.RealName
+	result.Tip = "注意事项\n 1.提现申请将在1到3个工作日内审批到账，请耐心等待 \n 2.我的订单 可查看兑换记录状态 \n 3.目前技术受限，暂时只支持支付宝提现，后期将开通微信"
 
 	value := config.FindByGroupAndKey("product", "price")
 	var productInfo []ProductInfo
@@ -54,7 +55,6 @@ func FindProductInfo(userId int) ResultProduct {
 
 	}
 	result.Pricelist = pricelst
-	result.Tip = "注意事项\n 1.提现申请将在1到3个工作日内审批到账，请耐心等待 \n 2。我的订单 可查看兑换记录状态 \n 3.目前技术受限，暂时只支持支付宝提现，后期将开通微信"
 
 	return result
 
@@ -74,4 +74,36 @@ func AddOrderInfo(userId int, price float64) bool {
 	} else {
 		return false
 	}
+}
+
+type OrderResult struct {
+	Price      float64
+	StateMsg   string
+	AppleyTime string
+}
+
+func GetOrderList(userId int) []OrderResult {
+	var order Models.Order
+
+	orderlst := order.FindeOrderByUserId(userId)
+	var orderRestultlst []OrderResult
+	for _, v := range orderlst {
+		var orderResult OrderResult
+		if v.State == 0 {
+			orderResult.StateMsg = "待审核"
+		} else if v.State == 1 {
+			orderResult.StateMsg = "已通过"
+
+		} else {
+			orderResult.StateMsg = "已拒绝"
+		}
+
+		orderResult.Price = v.Price
+		applayTime := v.CreatedAt.Format("2006年01月02日")
+		orderResult.AppleyTime = applayTime
+		orderRestultlst = append(orderRestultlst, orderResult)
+
+	}
+	return orderRestultlst
+
 }

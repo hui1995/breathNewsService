@@ -2,6 +2,7 @@ package Controllers
 
 import (
 	"breathNewsService/Services"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strconv"
@@ -43,5 +44,12 @@ func OrderProduct(c *gin.Context) {
 			"message": "订单过多",
 		})
 	}
+
+}
+func OrderList(c *gin.Context) {
+	userID := c.GetInt("userId")
+	data := Services.GetOrderList(userID)
+	fmt.Println(data)
+	c.HTML(http.StatusOK, "orderhistory.html", gin.H{"data": data})
 
 }

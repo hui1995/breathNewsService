@@ -52,3 +52,11 @@ func (this *Order) FindeOrderByState(userId, state int) bool {
 	return false
 
 }
+
+func (this *Order) FindeOrderByUserId(userId int) []Order {
+	var orders []Order
+
+	Mysql.DB.Model(&Order{}).Where("user_id = ?", userId).Order("created_at desc").Limit(20).Find(&orders)
+	return orders
+
+}
