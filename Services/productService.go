@@ -22,6 +22,7 @@ type ResultProduct struct {
 	Alipay      string
 	RealName    string
 	Pricelist   []int
+	Tip         string
 }
 type ProductInfo struct {
 	Product int
@@ -53,6 +54,7 @@ func FindProductInfo(userId int) ResultProduct {
 
 	}
 	result.Pricelist = pricelst
+	result.Tip = "注意事项\n 1.提现申请将在1到3个工作日内审批到账，请耐心等待 \n 2。我的订单 可查看兑换记录状态 \n 3.目前技术受限，暂时只支持支付宝提现，后期将开通微信"
 
 	return result
 
