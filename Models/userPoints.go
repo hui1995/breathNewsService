@@ -55,3 +55,15 @@ func (this *UserPoints) InsertInfo(realNum, points int) bool {
 	return true
 
 }
+
+//加积分
+func (this *UserPoints) AddPoints(userId, points int) bool {
+	var userPoints UserPoints
+
+	Mysql.DB.Where(&UserPoints{UserId: userId}).First(&userPoints)
+
+	var pointsNow = userPoints.Points + points
+	Mysql.DB.Model(&userPoints).Update("points", pointsNow)
+	return true
+
+}

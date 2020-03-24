@@ -13,6 +13,7 @@ type IncomeRecord struct {
 	Money   float64
 	UserId  int
 	Message string
+	Status  int
 }
 
 //func init() {
@@ -22,8 +23,8 @@ type IncomeRecord struct {
 //	}
 //}
 
-func (this *IncomeRecord) Insert(type1 int, userId int, money float64) bool {
-	var incomeRecord = IncomeRecord{Type: type1, UserId: userId, Money: money}
+func (this *IncomeRecord) Insert(type1 int, userId int, money float64, stattus int) bool {
+	var incomeRecord = IncomeRecord{Type: type1, UserId: userId, Money: money, Status: stattus}
 	Mysql.DB.Create(&incomeRecord)
 	return true
 

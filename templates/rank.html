@@ -45,7 +45,10 @@
                         </div>
                         <div class="item-title"
                         {{if .IsMe }}
-                             style="color: #008577"
+                             style="color: #008577;text-align: left"
+
+                                {{else}}
+                             style="text-align: left"
                         {{end}}
                         >{{.UserName}}</div>
                         <div class="item-after"

@@ -2,6 +2,7 @@ package Services
 
 import (
 	"breathNewsService/Models"
+	"fmt"
 	"math/rand"
 	"time"
 )
@@ -11,6 +12,7 @@ func Consumption(id uint, userId int) (float64, int) {
 	var readPointsReward Models.ReadPointsReward
 	var userPoints Models.UserPoints
 	var readConsumption Models.ReadConsumption
+	var incomeRecord Models.IncomeRecord
 
 	isExist := readConsumption.ExistReadRecordByUserIdAndArticleId(userId, id)
 	if isExist {
@@ -40,12 +42,14 @@ func Consumption(id uint, userId int) (float64, int) {
 	high := readPointsReward1.Hight
 	low := readPointsReward1.Low
 	rate := readPointsReward1.Rate
+
 	var price float64
 	//如果在概率之内，则获取奖励
 	if rand.Float64() < rate {
 		for {
 			price = rand.Float64()
 			if low <= price && price < high {
+				incomeRecord.Insert(0, userId, price, 0)
 				break
 			}
 		}
@@ -64,4 +68,24 @@ func RandInt64(min, max int64) int64 {
 	}
 	rand.Seed(time.Now().UnixNano())
 	return rand.Int63n(max-min) + min
+}
+func AddPoints(userId int) bool {
+	var userPoints Models.UserPoints
+	var points float64
+	//如果在概率之内，则获取奖励
+	for {
+		points = rand.Float64()
+		if 0.6 <= points && points <= 0.8 {
+			break
+		}
+	}
+
+	fmt.Println(points)
+
+	ppintsInt := int(points * 100)
+	fmt.Println(ppintsInt)
+
+	userPoints.AddPoints(userId, ppintsInt)
+	return true
+
 }

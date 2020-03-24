@@ -26,3 +26,7 @@ func RankHelpController(c *gin.Context) {
 
 	c.HTML(http.StatusOK, "rank_help.html", nil)
 }
+
+func InviteController(c *gin.Context) {
+	c.HTML(http.StatusOK, "invite.html", nil)
+}
