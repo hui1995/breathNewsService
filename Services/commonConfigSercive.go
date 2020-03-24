@@ -30,11 +30,6 @@ type AdsConfig struct {
 	Ads      []string
 }
 
-type QueryRule struct {
-	Limit    int
-	Interval int
-}
-
 type ConfigInfo struct {
 	IsOpen   bool
 	Rate     int

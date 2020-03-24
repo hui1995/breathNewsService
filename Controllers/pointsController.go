@@ -64,10 +64,33 @@ func AuthPermissionArticle(c *gin.Context) {
 func AddPoints(c *gin.Context) {
 	userID := c.GetInt("userId")
 
-	isTrue := Services.AddPoints(userID)
+	points := Services.AddPoints(userID)
 	c.JSON(http.StatusOK, gin.H{
 		"code":    1,
 		"message": "获取成功",
-		"data":    isTrue,
+		"data":    points,
 	})
+}
+func AuthPointDraw(c *gin.Context) {
+	userID := c.GetInt("userId")
+	count, invert := Services.SelectLimit(userID)
+	if count == 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": "今日领取已经达到上限",
+		})
+	} else if count == -1 {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": "领取太频繁，请" + strconv.Itoa(invert) + "稍后再试",
+		})
+
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"code":    -1,
+			"message": "可以抽取",
+			"data":    count,
+		})
+	}
+
 }

@@ -36,6 +36,7 @@ func InitRouter() {
 		v1.GET("/orderlst", Controllers.OrderList)
 		v1.GET("/invite", Controllers.InviteController)
 		v1.GET("/add/points", Controllers.AddPoints)
+		v1.GET("/auth/draw", Controllers.AuthPointDraw)
 
 	}
 

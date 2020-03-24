@@ -10,7 +10,7 @@ var DB *gorm.DB
 
 func init() {
 	var err error
-	DB, err = gorm.Open("mysql", "root:breathcoder.com@tcp(148.70.172.191:3306)/breath_news?charset=utf8&parseTime=true")
+	DB, err = gorm.Open("mysql", "root:breathcoder.com@tcp(148.70.172.191:3306)/breath_news?charset=utf8&parseTime=true&loc=Local")
 	DB.LogMode(true)
 	if err != nil {
 		fmt.Printf("mysql connect error %v", err)
