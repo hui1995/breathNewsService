@@ -87,7 +87,7 @@ func AuthPointDraw(c *gin.Context) {
 
 	} else {
 		c.JSON(http.StatusOK, gin.H{
-			"code":    -1,
+			"code":    1,
 			"message": "可以抽取",
 			"data":    count,
 		})
