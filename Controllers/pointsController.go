@@ -62,9 +62,9 @@ func AuthPermissionArticle(c *gin.Context) {
 
 }
 func AddPoints(c *gin.Context) {
-	userID := c.Query("user_id")
-	user_id, _ := strconv.Atoi(userID)
-	isTrue := Services.AddPoints(user_id)
+	userID := c.GetInt("userId")
+
+	isTrue := Services.AddPoints(userID)
 	c.JSON(http.StatusOK, gin.H{
 		"code":    1,
 		"message": "获取成功",
