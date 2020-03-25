@@ -54,22 +54,14 @@ func ArticleList(c *gin.Context) {
 		channelInt, _ = strconv.Atoi(channel)
 
 	}
+	info := Services.GetMain(userID)
+
 	articlelst := Services.GetHomeArticleList(channelInt, userID)
 	c.JSON(http.StatusOK, gin.H{
 		"code":    1,
 		"message": "获取成功",
 		"data":    articlelst,
+		"main":    info,
 	})
 	return
-}
-
-func GetMainInfo(c *gin.Context) {
-	userID := c.GetInt("userId")
-
-	info := Services.GetMain(userID)
-	c.JSON(http.StatusOK, gin.H{
-		"code":    1,
-		"message": "获取成功",
-		"data":    info,
-	})
 }
