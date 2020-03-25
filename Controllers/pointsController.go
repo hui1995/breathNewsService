@@ -94,3 +94,15 @@ func AuthPointDraw(c *gin.Context) {
 	}
 
 }
+
+func DrawReadReal(c *gin.Context) {
+	userID := c.GetInt("userId")
+	id := c.Param("id")
+	idInt, _ := strconv.Atoi(id)
+	Services.ReadIsReal(userID, idInt)
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": "成功",
+	})
+
+}

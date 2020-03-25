@@ -64,6 +64,7 @@ func (this *ReadConsumption) FindReadRecordByUserId(userId int) []ReadConsumptio
 }
 
 func (this *ReadConsumption) UpdateRecord(articleId uint, userId int, status int) bool {
-	Mysql.DB.Where(ReadConsumption{ArticleId: articleId, UserId: userId}).Update("status", 1)
+	var readConsumption ReadConsumption
+	Mysql.DB.Model(&readConsumption).Where(&ReadConsumption{UserId: userId, ArticleId: articleId}).Update("status", status)
 	return true
 }

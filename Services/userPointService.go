@@ -134,3 +134,8 @@ func SelectLimit(userId int) (int, int) {
 	}
 	return result, 0
 }
+
+func ReadIsReal(userId int, articleId int) {
+	var readConsumption Models.ReadConsumption
+	readConsumption.UpdateRecord(uint(articleId), userId, 1)
+}
