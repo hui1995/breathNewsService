@@ -20,12 +20,12 @@ type Article struct {
 	State      int
 }
 
-func init() {
-	table := Mysql.DB.HasTable(Article{})
-	if !table {
-		Mysql.DB.CreateTable(Article{})
-	}
-}
+//func init() {
+//	table := Mysql.DB.HasTable(Article{})
+//	if !table {
+//		Mysql.DB.CreateTable(Article{})
+//	}
+//}
 
 func (this *Article) FindById(id uint) (*Article, error) {
 	var article Article

@@ -62,3 +62,14 @@ func ArticleList(c *gin.Context) {
 	})
 	return
 }
+
+func GetMainInfo(c *gin.Context) {
+	userID := c.GetInt("userId")
+
+	info := Services.GetMain(userID)
+	c.JSON(http.StatusOK, gin.H{
+		"code":    1,
+		"message": "获取成功",
+		"data":    info,
+	})
+}

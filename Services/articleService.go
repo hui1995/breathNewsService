@@ -76,3 +76,33 @@ func GetHomeArticleList(channel, userId int) []articleHomeBean {
 	//查询列表，关联查询
 
 }
+
+type Restulemain struct {
+	Points int
+	Day    int
+	Score  int
+}
+
+func GetMain(userId int) Restulemain {
+
+	var points Models.UserPoints
+	var readDay Models.ReadRecord
+	var scoreRank Models.Rank
+	var resulteMain Restulemain
+
+	pointsInfo := points.SelectPointsByUserId(userId)
+	readDayInfo := readDay.GetRankRecordByUseId(userId)
+	scoreInfo := scoreRank.GetCurrentRank(userId)
+	resulteMain.Points = pointsInfo.Points
+
+	if readDayInfo == nil {
+		resulteMain.Points = 0
+	} else {
+		resulteMain.Points = pointsInfo.Points
+
+	}
+
+	resulteMain.Score = scoreInfo.Score
+	return resulteMain
+
+}
