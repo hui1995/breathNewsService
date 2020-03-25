@@ -21,3 +21,12 @@ func GetInComeRecord(c *gin.Context) {
 	c.HTML(http.StatusOK, "history.html", gin.H{"data": reuslt})
 
 }
+
+func IncomeByDetail(c *gin.Context) {
+	userID := c.GetInt("userId")
+	Services.AddIncome(userID)
+	c.JSON(http.StatusOK,
+		gin.H{
+			"code": 1, "msg": "获取成功"})
+
+}

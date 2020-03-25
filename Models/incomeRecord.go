@@ -39,3 +39,16 @@ func (this *IncomeRecord) FindByUser(userId int) []IncomeRecord {
 
 	return incomeRecordlst
 }
+
+func (this *IncomeRecord) FindByUserType(userId int) IncomeRecord {
+	var incomeRecord IncomeRecord
+	Mysql.DB.Model(&IncomeRecord{}).Where("user_id = ? and type = 0 and status = 0", userId).Order("created_at desc").First(&incomeRecord)
+	return incomeRecord
+
+}
+
+func (this *IncomeRecord) UpdateRecord(Id uint, status int) bool {
+	var incomeRecord IncomeRecord
+	Mysql.DB.First(&incomeRecord, Id).Update("status", status)
+	return true
+}

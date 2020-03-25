@@ -29,3 +29,19 @@ func GetIncomeRecord(userId int) []IncomeHisty {
 	}
 	return resultlst
 }
+
+func AddIncome(userId int) bool {
+	var incomeRecord Models.IncomeRecord
+	incomeInfo := incomeRecord.FindByUserType(userId)
+	if incomeInfo.Money != 0 {
+		incomeRecord.UpdateRecord(incomeInfo.ID, 1)
+		var userinfo Models.User
+		username, _ := userinfo.FindByRealNum(userId)
+		activtyMoney := username.ActiveMoney + incomeInfo.Money
+		Money := username.Money + incomeInfo.Money
+		userinfo.UpdateMoney(userId, Money, username.FreezeMoney, activtyMoney)
+	}
+
+	return true
+
+}
