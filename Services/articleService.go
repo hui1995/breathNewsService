@@ -96,10 +96,15 @@ func GetMain(userId int) Restulemain {
 	resulteMain.Points = pointsInfo.Points
 
 	if readDayInfo == nil {
+		resulteMain.Day = 0
+	} else {
+		resulteMain.Day = readDayInfo.Count
+
+	}
+	if &pointsInfo == nil {
 		resulteMain.Points = 0
 	} else {
 		resulteMain.Points = pointsInfo.Points
-
 	}
 
 	resulteMain.Score = scoreInfo.Score
