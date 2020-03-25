@@ -22,11 +22,11 @@ func InitRouter() {
 	router.GET("/private/", Controllers.PrivateController)
 	router.GET("/contract/", Controllers.Contractontroller)
 	router.GET("/rankhelp", Controllers.RankHelpController)
+	router.GET("/article/:id", Controllers.ArticleDetail)
 
 	v1 := router.Group("/api")
 	v1.Use(Middlewares.LoginAuth())
 	{
-		v1.GET("/article/:id", Controllers.ArticleDetail)
 		v1.GET("/history/", Controllers.GetInComeRecord)
 		v1.GET("/auth/article/", Controllers.AuthPermissionArticle)
 		v1.GET("/product", Controllers.ProductController)

@@ -3,6 +3,7 @@ package Controllers
 import (
 	"breathNewsService/Services"
 	"github.com/gin-gonic/gin"
+	"html/template"
 	"net/http"
 	"strconv"
 )
@@ -26,10 +27,13 @@ func ArticleDetail(c *gin.Context) {
 
 	article, err := Services.GetArticleDeatil(uint(idInt))
 	if err == nil {
-		c.JSON(http.StatusOK, gin.H{
-			"code":    1,
-			"message": "获取成功",
-			"data":    &article,
+
+		c.HTML(http.StatusOK, "detail.html", gin.H{
+			"code":        1,
+			"message":     "获取成功",
+			"data":        &article,
+			"content":     template.HTML(article.Content),
+			"create_time": article.CreatedAt.Format("2006年01月02日"),
 		})
 	} else {
 		c.JSON(http.StatusOK, gin.H{
