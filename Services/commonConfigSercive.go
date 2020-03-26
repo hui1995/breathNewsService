@@ -125,7 +125,7 @@ func CheckPlatform(devideId string, platform string, manufacturer string, model 
 	for _, item := range platforms {
 
 		if item.Platform == platform {
-			configInfo.IsOpen = true
+			configInfo.IsOpen = item.Open
 			break
 
 		}
