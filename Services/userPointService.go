@@ -51,7 +51,7 @@ func Consumption(id uint, userId int) (float64, int) {
 		for {
 			price = rand.Float64()
 			if low <= price && price < high {
-				incomeRecord.Insert(0, userId, price, 0)
+				incomeRecord.Insert(0, userId, price, 0, "阅读中奖")
 				break
 			}
 		}
@@ -123,8 +123,6 @@ func SelectLimit(userId int) (int, int) {
 
 	Interval := queryRule[0].Interval
 	now := time.Now()
-	fmt.Println(pointInfo.UpdatedAt)
-	fmt.Println(time.Now())
 
 	subM := now.Sub(pointInfo.UpdatedAt)
 	interval2 := subM.Seconds()

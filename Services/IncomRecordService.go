@@ -18,7 +18,7 @@ type IncomeHisty struct {
 
 func GetIncomeRecord(userId int) []IncomeHisty {
 	var incomeRcord Models.IncomeRecord
-	lst := incomeRcord.FindByUser(userId)
+	lst := incomeRcord.FindByUser(userId, 1)
 	var resultlst []IncomeHisty
 	for _, v := range lst {
 		var incomeHistory IncomeHisty

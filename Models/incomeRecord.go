@@ -23,19 +23,19 @@ type IncomeRecord struct {
 //	}
 //}
 
-func (this *IncomeRecord) Insert(type1 int, userId int, money float64, stattus int) bool {
-	var incomeRecord = IncomeRecord{Type: type1, UserId: userId, Money: money, Status: stattus}
+func (this *IncomeRecord) Insert(type1 int, userId int, money float64, stattus int, message string) bool {
+	var incomeRecord = IncomeRecord{Type: type1, UserId: userId, Money: money, Status: stattus, Message: message}
 	Mysql.DB.Create(&incomeRecord)
 	return true
 
 }
 
 //获取记录
-func (this *IncomeRecord) FindByUser(userId int) []IncomeRecord {
+func (this *IncomeRecord) FindByUser(userId, status int) []IncomeRecord {
 	incomeRecordlst := make([]IncomeRecord, 0)
 	Db := Mysql.DB
 
-	Db = Db.Where("user_id = ?", userId).Order("id desc").Limit(30).Find(&incomeRecordlst)
+	Db = Db.Where("user_id = ? and status = ?", userId, status).Order("id desc").Limit(30).Find(&incomeRecordlst)
 
 	return incomeRecordlst
 }

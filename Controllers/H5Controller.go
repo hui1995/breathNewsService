@@ -30,3 +30,7 @@ func RankHelpController(c *gin.Context) {
 func InviteController(c *gin.Context) {
 	c.HTML(http.StatusOK, "invite.html", nil)
 }
+
+func Test(c *gin.Context) {
+	c.HTML(http.StatusOK, "test2.html", nil)
+}

@@ -23,6 +23,7 @@ func InitRouter() {
 	router.GET("/contract/", Controllers.Contractontroller)
 	router.GET("/rankhelp", Controllers.RankHelpController)
 	router.GET("/article/:id", Controllers.ArticleDetail)
+	router.GET("/test", Controllers.Test)
 
 	v1 := router.Group("/api")
 	v1.Use(Middlewares.LoginAuth())
