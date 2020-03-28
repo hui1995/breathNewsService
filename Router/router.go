@@ -40,6 +40,7 @@ func InitRouter() {
 		v1.GET("/auth/draw", Controllers.AuthPointDraw)
 		v1.GET("/draw/real/:id", Controllers.DrawReadReal)
 		v1.GET("/income/detail", Controllers.IncomeByDetail)
+		v1.GET("/invite/:inviter", Controllers.InviteInfoController)
 
 	}
 

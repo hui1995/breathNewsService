@@ -1,6 +1,9 @@
 package Models
 
-import "github.com/jinzhu/gorm"
+import (
+	"breathNewsService/Databases/Mysql"
+	"github.com/jinzhu/gorm"
+)
 
 /**
  * @Author: hui
@@ -13,15 +16,21 @@ import "github.com/jinzhu/gorm"
 type Invite struct {
 	gorm.Model
 	Inviter      int
-	invitee      int
+	Invitee      int
 	State        int
 	OptionUserId int
 	Desction     string
 }
 
-//func init() {
-//	table := Mysql.DB.HasTable(Order{})
-//	if !table {
-//		Mysql.DB.CreateTable(Order{})
-//	}
-//}
+func init() {
+	table := Mysql.DB.HasTable(Invite{})
+	if !table {
+		Mysql.DB.CreateTable(Invite{})
+	}
+}
+func (this *Invite) InsertInvite(userId, inviteeId int) Invite {
+	var invite Invite
+	Mysql.DB.Where(Invite{Inviter: userId, Invitee: inviteeId}).FirstOrCreate(&invite)
+	return invite
+
+}

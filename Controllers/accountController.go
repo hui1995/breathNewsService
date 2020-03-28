@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 )
 
 /**
@@ -96,4 +97,14 @@ func UserInfoDetail(c *gin.Context) {
 		"data":   userInfo,
 		"msg":    "获取成功"})
 
+}
+func InviteInfoController(c *gin.Context) {
+	userId := c.GetInt("userId")
+	inviter := c.Param("inviter")
+	idInt, _ := strconv.Atoi(inviter)
+	Services.Invite(idInt, userId)
+	c.JSON(http.StatusOK, gin.H{
+		"status": 1,
+		"msg":    "邀请成功",
+	})
 }

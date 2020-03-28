@@ -112,3 +112,9 @@ func GetUserInfo(userId int) UserInfo {
 	return userInfo
 
 }
+
+func Invite(inviter, invitee int) bool {
+	var invitte Models.Invite
+	invitte.InsertInvite(inviter, invitee)
+	return true
+}

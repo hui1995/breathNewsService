@@ -84,8 +84,10 @@
     new JMLink({
         jmlink:'AA4o',
         button:document.querySelector('a#btnOpenApp'),
-        params:{"test":"test1223423"},
-        invtparams:{"u_id":"352363737"}
+        autoLaunchApp : false,
+        downloadWhenUniversalLinkFailed: true,
+        inapp : false,
+        invtparams: {u_id : "uid-123456"}
     });
 </script>
 
