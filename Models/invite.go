@@ -38,7 +38,7 @@ func (this *Invite) InsertInvite(userId, inviteeId int) Invite {
 func (this *Invite) FindeByInvitee(userId int) bool {
 
 	var count int
-	Mysql.DB.Model(&Invite{}).Where("invitee = ? ", userId, userId).Count(&count)
+	Mysql.DB.Model(&Invite{}).Where("invitee = ? ", userId).Count(&count)
 	if count == 0 {
 
 		return true
