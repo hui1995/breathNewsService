@@ -99,10 +99,13 @@ type UserInfo struct {
 	UserName string
 	Money    float64
 	Point    int
+	IsInvite bool
 }
 
 func GetUserInfo(userId int) UserInfo {
 	var user Models.User
+	var invitte Models.Invite
+
 	var userPoint Models.UserPoints
 	userCurrent, _ := user.FindByRealNum(userId)
 	userPoint = userPoint.SelectPointsByUserId(userId)
@@ -110,6 +113,13 @@ func GetUserInfo(userId int) UserInfo {
 	userInfo.Money = userCurrent.Money
 	userInfo.UserName = userCurrent.UserName
 	userInfo.Point = userPoint.Points
+	if invitte.FindeByInvitee(userId) {
+		userInfo.IsInvite = false
+
+	} else {
+		userInfo.IsInvite = true
+
+	}
 	return userInfo
 
 }
