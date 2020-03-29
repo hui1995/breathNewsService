@@ -24,6 +24,7 @@ func InitRouter() {
 	router.GET("/rankhelp", Controllers.RankHelpController)
 	router.GET("/article/:id", Controllers.ArticleDetail)
 	router.GET("/test", Controllers.Test)
+	router.GET("/h5/invitelst/:userId", Controllers.InviteHistoryController)
 
 	v1 := router.Group("/api")
 	v1.Use(Middlewares.LoginAuth())
@@ -42,7 +43,6 @@ func InitRouter() {
 		v1.GET("/income/detail", Controllers.IncomeByDetail)
 		v1.GET("/invite/:inviter", Controllers.InviteInfoController)
 		v1.GET("/h5/invite", Controllers.InviteH5Controller)
-		v1.GET("/h5/invitelst/:userId", Controllers.InviteHistoryController)
 
 	}
 

@@ -25,7 +25,7 @@
 <div class="aui-content-padded ">
 
 
-    <a href="/api/h5/invitelst/{{.data.Inviter}}"> <div style="width: 70%;height: 60px;background-color: #EEEEEE;border-radius: 30px;margin: 0 auto;text-align: center;line-height: 30px;margin-top: -40px">
+    <a href="/h5/invitelst/{{.data.Inviter}}"> <div style="width: 70%;height: 60px;background-color: #EEEEEE;border-radius: 30px;margin: 0 auto;text-align: center;line-height: 30px;margin-top: -40px">
 
         <p style="font-size: 18px">{{.data.Count}}</p>
 
@@ -71,9 +71,9 @@
 
 
 
-        document.addEventListener('copy', save); // 监听浏览器copy事件
-        document.execCommand('copy'); // 执行copy事件，这时监听函数会执行save函数。
-        document.removeEventListener('copy', save); // 移除copy事件
+        document.addEventListener('Copy', save); // 监听浏览器copy事件
+        document.execCommand('Copy'); // 执行copy事件，这时监听函数会执行save函数。
+        document.removeEventListener('Copy', save); // 移除copy事件
 
         // 保存方法
         function save(e) {
