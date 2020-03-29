@@ -10,6 +10,8 @@
     <link rel="stylesheet" type="text/css" href="https://breathcoder.oss-cn-hangzhou.aliyuncs.com/aui.css" />
 
     <script type='text/javascript' src='http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js'></script>
+    <script type='text/javascript' src='http://aui.dianm.cc/aui2.0/script/aui-toast.js'></script>
+
 
     <script src="https://cdn.bootcss.com/qrious/4.0.2/qrious.min.js"></script>
 
@@ -65,6 +67,10 @@
 
     function copyContent () {
 
+        var toast = new auiToast();
+
+
+
         document.addEventListener('copy', save); // 监听浏览器copy事件
         document.execCommand('copy'); // 执行copy事件，这时监听函数会执行save函数。
         document.removeEventListener('copy', save); // 移除copy事件
@@ -75,8 +81,8 @@
             e.preventDefault();
 
             toast.success({
-                title:"提交成功",
-                duration:2000
+                title:"已复制",
+                duration:3000
             });
         }
     }
