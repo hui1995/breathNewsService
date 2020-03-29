@@ -71,9 +71,9 @@
 
 
 
-        document.addEventListener('Copy', save); // 监听浏览器copy事件
-        document.execCommand('Copy'); // 执行copy事件，这时监听函数会执行save函数。
-        document.removeEventListener('Copy', save); // 移除copy事件
+        document.addEventListener('copy', save); // 监听浏览器copy事件
+        document.execCommand('copy'); // 执行copy事件，这时监听函数会执行save函数。
+        document.removeEventListener('copy', save); // 移除copy事件
 
         // 保存方法
         function save(e) {
