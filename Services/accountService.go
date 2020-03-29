@@ -149,7 +149,7 @@ func InviteAny(userId int) AnyInvite {
 	var invitee Models.Invite
 	count := invitee.FindCountByInviter(userId)
 	var anyInvite AnyInvite
-	anyInvite.Url = "https://atvspn.jmlk.co/AA4o?mw_dynp_u_id=" + strconv.Itoa(userId)
+	anyInvite.Url = strconv.Itoa(userId)
 	anyInvite.Count = count
 	anyInvite.Inviter = userId
 
