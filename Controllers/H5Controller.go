@@ -32,5 +32,5 @@ func InviteController(c *gin.Context) {
 }
 
 func Test(c *gin.Context) {
-	c.HTML(http.StatusOK, "test2.html", nil)
+	c.HTML(http.StatusOK, "invitelst.html", nil)
 }

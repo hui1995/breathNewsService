@@ -3,8 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <link rel="stylesheet" type="text/css" href="https://breathcoder.oss-cn-hangzhou.aliyuncs.com/aui.css" />
+
+    <script type='text/javascript' src='http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js'></script>
+
+    <script src="https://cdn.bootcss.com/qrious/4.0.2/qrious.min.js"></script>
+
+
 </head>
-<body>
+<body style="background-color: white">
+
+<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3314341612,3498223167&fm=26&gp=0.jpg" alt="" style="width: 100%;height: 200px">
+
+
+<div class="aui-content-padded ">
+
+
+    <a href="/api/h5/invitelst/{{.data.Inviter}}"> <div style="width: 70%;height: 60px;background-color: #EEEEEE;border-radius: 30px;margin: 0 auto;text-align: center;line-height: 30px;margin-top: -40px">
+
+        <p style="font-size: 18px">{{.data.Count}}</p>
+
+        <p style="color: #AAAAAA">邀请好友</p>
+
+    </div></a>
+
+
+<img id="qrious" style="margin: 0 auto;margin-top: 30px"/>
+
+
+
+
+    <h4>规则说明</h4>
+    <p>1.好友消耗积分，按一定比例折算参与阅读力计算</p>
+    <p>2.邀请100位有效好友(至少有一次进入榜单排名)，即可参与合伙人计划，好友产生收益，合伙人获取好友收益的百分之20奖励</p>
+    <p>3.即读保留本活动的最终解释权，并将严查恶意刷邀请，刷阅读等行为，一旦发现，取消其奖励资格</p>
+<div style="width: 100%;height: 60px"></div>
+
+
+
+
+
+
+
+</div>
+
+<footer class="aui-bar aui-bar-tab" id="footer">
+
+
+
+<p><div class="aui-btn aui-btn-block aui-btn-sm" onclick="copyContent()" style="background-color: #A4CA9E;color: white;width: 90%;margin: 0 auto">点击获取分享链接</div></p>
+
+</footer>
+
+
+
+<script type="text/javascript">
+
+    function copyContent () {
+
+        document.addEventListener('copy', save); // 监听浏览器copy事件
+        document.execCommand('copy'); // 执行copy事件，这时监听函数会执行save函数。
+        document.removeEventListener('copy', save); // 移除copy事件
+
+        // 保存方法
+        function save(e) {
+            e.clipboardData.setData('text/plain', "[即读，连续阅读七日即可参与当日收入的百分之20的收益分成瓜分，点击下方链接立刻加入]     {{.data.Url}}"); // 剪贴板内容设置
+            e.preventDefault();
+
+            toast.success({
+                title:"提交成功",
+                duration:2000
+            });
+        }
+    }
+</script>
+
+
+<script type="text/javascript">
+    var qr = new QRious({
+        // 二维码生成容器
+        element : document.getElementById("qrious"),
+        // 二维码大小
+        size : 200,
+        // 容错等级
+        level : 'L',
+        // 二维码颜色
+        foreground :'black',
+        // URL链接
+        value : '{{.data.Url}}'
+    });
+
+
+
+</script>
+
 
 </body>
+
+
 </html>

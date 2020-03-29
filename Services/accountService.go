@@ -4,6 +4,7 @@ import (
 	"breathNewsService/Controllers/Response"
 	"breathNewsService/Models"
 	jwtgo "github.com/dgrijalva/jwt-go"
+	"strconv"
 
 	myjwt "breathNewsService/Middlewares"
 	"breathNewsService/utils"
@@ -115,6 +116,32 @@ func GetUserInfo(userId int) UserInfo {
 
 func Invite(inviter, invitee int) bool {
 	var invitte Models.Invite
-	invitte.InsertInvite(inviter, invitee)
-	return true
+	if invitte.FindeByInvitee(invitee) {
+		invitte.InsertInvite(inviter, invitee)
+		return true
+
+	}
+	return false
+}
+func InviteeList(userId int) []Models.Invite {
+	var invitte Models.Invite
+	return invitte.FIndInviteeByInviter(userId)
+}
+
+type AnyInvite struct {
+	Count   int
+	Url     string
+	Inviter int
+}
+
+func InviteAny(userId int) AnyInvite {
+
+	var invitee Models.Invite
+	count := invitee.FindCountByInviter(userId)
+	var anyInvite AnyInvite
+	anyInvite.Url = "https://atvspn.jmlk.co/AA4o?mw_dynp_u_id=" + strconv.Itoa(userId)
+	anyInvite.Count = count
+	anyInvite.Inviter = userId
+
+	return anyInvite
 }

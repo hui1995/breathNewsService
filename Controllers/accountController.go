@@ -108,3 +108,24 @@ func InviteInfoController(c *gin.Context) {
 		"msg":    "邀请成功",
 	})
 }
+
+func InviteH5Controller(c *gin.Context) {
+	userID := c.GetInt("userId")
+
+	data := Services.InviteAny(userID)
+
+	c.HTML(http.StatusOK, "invite.html", gin.H{
+		"data": data,
+	})
+}
+
+func InviteHistoryController(c *gin.Context) {
+	userID := c.Param("userId")
+	idInt, _ := strconv.Atoi(userID)
+	lst := Services.InviteeList(idInt)
+
+	c.HTML(http.StatusOK, "invitelst.html", gin.H{
+		"data": lst,
+	})
+
+}

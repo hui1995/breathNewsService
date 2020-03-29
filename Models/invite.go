@@ -34,3 +34,33 @@ func (this *Invite) InsertInvite(userId, inviteeId int) Invite {
 	return invite
 
 }
+
+func (this *Invite) FindeByInvitee(userId int) bool {
+
+	var count int
+	Mysql.DB.Model(&Invite{}).Where("invitee = ? ", userId, userId).Count(&count)
+	if count == 0 {
+
+		return true
+
+	}
+
+	return false
+
+}
+
+func (this *Invite) FindCountByInviter(userId int) int {
+
+	var count int
+	Mysql.DB.Model(&Invite{}).Where("inviter = ? ", userId).Count(&count)
+
+	return count
+}
+
+func (this *Invite) FIndInviteeByInviter(userId int) []Invite {
+	Db := Mysql.DB
+	var invitelst []Invite
+	Db = Db.Where("inviter = ?", userId).Find(&invitelst)
+	return invitelst
+
+}
