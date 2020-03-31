@@ -26,16 +26,16 @@ func GetTodayRank(c *gin.Context) {
 		rankTypeInt = 0
 	}
 	if rankTypeInt == 0 {
-		data := Services.GetTodayRank(userID)
+		data, meData := Services.GetTodayRank(userID)
 		c.HTML(http.StatusOK, "rank.html", gin.H{
-			"title": "今日榜单", "data": data, "value": "阅读指数",
+			"title": "今日榜单", "data": data, "meData": meData, "value": "阅读指数",
 		})
 
 	} else {
 
-		data := Services.GetYesRank(userID)
-		c.HTML(http.StatusOK, "rank.html", gin.H{
-			"title": "昨日榜单", "data": data, "value": "奖励",
+		data, meData := Services.GetYesRank(userID)
+		c.HTML(http.StatusOK, "rank3.html", gin.H{
+			"title": "昨日榜单", "data": data, "meData": meData, "value": "奖励",
 		})
 
 	}

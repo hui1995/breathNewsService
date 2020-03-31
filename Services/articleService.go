@@ -91,7 +91,7 @@ func GetMain(userId int) Restulemain {
 	var resulteMain Restulemain
 
 	pointsInfo := points.SelectPointsByUserId(userId)
-	readDayInfo := readDay.GetRankRecordByUseId(userId)
+	readDayInfo := readDay.GetDatRecordByUseId(userId)
 	scoreInfo := scoreRank.GetCurrentRank(userId)
 	resulteMain.Points = pointsInfo.Points
 

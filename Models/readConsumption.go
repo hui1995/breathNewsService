@@ -21,6 +21,7 @@ type ReadConsumption struct {
 	ArticleId uint
 	UserId    int
 	Point     int
+	Type      int
 	Status    int
 }
 
@@ -30,9 +31,9 @@ type ReadConsumption struct {
 //  Mysql.DB.CreateTable(ReadConsumption{})
 // }
 //}
-func (this *ReadConsumption) InsertRecord(userId int, articleId uint, points int) bool {
+func (this *ReadConsumption) InsertRecord(userId int, articleId uint, points int, Ttype int) bool {
 
-	var readConsumption = ReadConsumption{ArticleId: articleId, UserId: userId, Point: points}
+	var readConsumption = ReadConsumption{ArticleId: articleId, UserId: userId, Point: points, Type: Ttype}
 	Mysql.DB.Create(&readConsumption)
 	return true
 

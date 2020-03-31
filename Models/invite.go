@@ -49,6 +49,15 @@ func (this *Invite) FindeByInvitee(userId int) bool {
 
 }
 
+func (this *Invite) FindInviterByInvitee(userId int) Invite {
+
+	Db := Mysql.DB
+	var invite Invite
+	Db = Db.Where("invitee = ?", userId).First(&invite)
+	return invite
+
+}
+
 func (this *Invite) FindCountByInviter(userId int) int {
 
 	var count int

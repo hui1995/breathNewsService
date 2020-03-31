@@ -21,94 +21,94 @@ type TodayInfo struct {
 	Value    string
 	Position string
 	IsMe     bool
+	Day      int
+	Day2     int
+	UserId   int
 }
 
-func GetTodayRank(userId int) []TodayInfo {
+func GetTodayRank(userId int) ([]TodayInfo, TodayInfo) {
 
 	var rank Models.Rank
 	var todayInfos []TodayInfo
+
+	var readRecord Models.ReadRecord
 
 	ranklist := rank.GetRank()
 	for _, v := range ranklist {
 		var rankInfo TodayInfo
 
 		rankInfo.Value = strconv.Itoa(v.Score)
-		if v.UserId == userId {
-			rankInfo.IsMe = true
 
-		} else {
-			rankInfo.IsMe = false
-		}
 		rankInfo.Position = strconv.Itoa(v.Position)
 		rankInfo.UserName = v.UserName
 		todayInfos = append(todayInfos, rankInfo)
 
 	}
+	var todayInfo TodayInfo
 
 	if userId == 0 {
-		return todayInfos
+		return todayInfos, todayInfo
 	}
-	myRank := rank.GetCurrentRank(userId)
-	if myRank.Position > 10 {
-		var todayInfo TodayInfo
+
+	readDayInfo := readRecord.GetDatRecordByUseId(userId)
+
+	if readDayInfo.Count >= 7 {
+		myRank := rank.GetCurrentRank(userId)
 		todayInfo.UserName = myRank.UserName
 		todayInfo.Value = strconv.Itoa(myRank.Score)
-		if myRank.Position >= 1888 {
-			todayInfo.Position = "未上榜"
-		} else {
-			todayInfo.Position = strconv.Itoa(rank.Position)
-		}
+		todayInfo.Position = strconv.Itoa(rank.Position)
 		todayInfo.IsMe = true
 
-		todayInfos = append(todayInfos, todayInfo)
-
+	} else {
+		todayInfo.IsMe = false
+		todayInfo.Day = readDayInfo.Count
+		todayInfo.UserId = readDayInfo.UserId
+		todayInfo.Day2 = 7 - readDayInfo.Count
 	}
 
-	return todayInfos
+	return todayInfos, todayInfo
 }
 
-func GetYesRank(userId int) []TodayInfo {
+func GetYesRank(userId int) ([]TodayInfo, TodayInfo) {
 	var rankRecord Models.RankRecord
+	var readRecord Models.ReadRecord
 
 	day := utils.TransDayInt(time.Now().Year(), int(time.Now().Month()), time.Now().Day()-1)
 	recordlst := rankRecord.GetYesRank(day)
-	myyesRank := rankRecord.GetCurrentRank(day, userId)
 
 	var rankYess []TodayInfo
 	for _, v := range recordlst {
 		var rankInfo2 TodayInfo
-		if v.UserId == userId {
-			rankInfo2.IsMe = true
 
-		} else {
-			rankInfo2.IsMe = false
-		}
 		rankInfo2.Position = strconv.Itoa(v.Position)
 
 		rankInfo2.UserName = v.UserName
-		rankInfo2.Value = strconv.FormatFloat(v.Reward, 'g', 1, 64)
+		//n2, _ := strconv.ParseFloat(fmt.Sprintf("%.2f", v.Reward), 64)
+		rankInfo2.Value = strconv.FormatFloat(float64(v.Reward), 'f', 2, 64)
 		rankYess = append(rankYess, rankInfo2)
 
 	}
+	var todayInfo TodayInfo
 
 	if userId == 0 {
-		return rankYess
+		return rankYess, todayInfo
 	}
-	if myyesRank.Position > 10 {
-		var rankYes TodayInfo
-		if myyesRank.Position >= 1000 {
-			rankYes.Position = "未上榜"
+	readDayInfo := readRecord.GetDatRecordByUseId(userId)
 
-		} else {
-			rankYes.Position = strconv.Itoa(myyesRank.Position)
+	if readDayInfo.Count >= 7 {
+		myyesRank := rankRecord.GetCurrentRank(day, userId)
+		todayInfo.UserName = myyesRank.UserName
+		todayInfo.Value = strconv.Itoa(myyesRank.Score)
+		todayInfo.Position = strconv.Itoa(myyesRank.Position)
+		todayInfo.IsMe = true
 
-		}
-		rankYes.UserName = myyesRank.UserName
-		rankYes.Value = strconv.FormatFloat(myyesRank.Reward, 'g', 1, 64)
-		rankYess = append(rankYess, rankYes)
-
+	} else {
+		todayInfo.IsMe = false
+		todayInfo.Day = readDayInfo.Count
+		todayInfo.UserId = readDayInfo.UserId
+		todayInfo.Day2 = 7 - readDayInfo.Count
 	}
 
-	return rankYess
+	return rankYess, todayInfo
 
 }

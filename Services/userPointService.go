@@ -15,6 +15,7 @@ func Consumption(id uint, userId int) (float64, int) {
 	var userPoints Models.UserPoints
 	var readConsumption Models.ReadConsumption
 	var incomeRecord Models.IncomeRecord
+	var invite Models.Invite
 
 	isExist := readConsumption.ExistReadRecordByUserIdAndArticleId(userId, id)
 	if isExist {
@@ -34,7 +35,11 @@ func Consumption(id uint, userId int) (float64, int) {
 	}
 
 	if userPoints.SubPoints(userId, articleInfo.Price) {
-		readConsumption.InsertRecord(userId, id, articleInfo.Price)
+		iinviter := invite.FindInviterByInvitee(userId)
+		price := float64(articleInfo.Price) * 0.2
+		readConsumption.InsertRecord(iinviter.Inviter, id, int(price), 1)
+		readConsumption.InsertRecord(userId, id, articleInfo.Price, 0)
+
 	} else {
 		return 0, -4
 	}

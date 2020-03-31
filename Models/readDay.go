@@ -31,8 +31,8 @@ func init() {
 	}
 }
 
-//获取或者创建
-func (this *ReadRecord) GetRankRecordByUseId(userId int) *ReadRecord {
+//获
+func (this *ReadRecord) GetDatRecordByUseId(userId int) *ReadRecord {
 
 	var readRecord ReadRecord
 	err := Mysql.DB.Where("user_id = ?", userId).First(&readRecord).Error

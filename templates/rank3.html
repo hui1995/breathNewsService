@@ -45,33 +45,33 @@
         </ul>
 
 
-        <div class="aui-card-list" style="margin:0 auto;margin-top: 20px;width: 90%;background-color: white">
+    <div class="aui-card-list" style="margin:0 auto;margin-top: 20px;width: 90%;background-color: white">
 
 
-            <div class="aui-card-list-header aui-card-list-user aui-border-b">
+    <div class="aui-card-list-header aui-card-list-user aui-border-b">
 
-                {{if .meData.IsMe}}
+    {{if .meData.IsMe}}
 
-                <div class="aui-card-list-user-name">
-                    <div>用户{{.meData.UserId}}</div>
-                    <small>排名：{{.meData.Position}}</small>
-                </div>
-                <div class="aui-card-list-user-info">阅读指数：{{.meData.Value}}</div>
-            </div>
-                        {{else}}
-
-                    <div class="aui-card-list-user-name">
-                        <div>我的排名</div>
-                        <small>阅读天数：{{.meData.Day}}</small>
-                    </div>
-                    <div class="aui-card-list-user-info">
-                        距离分享受分成成还有：{{.meData.Day2}}</div>
-                </div>
-
-                        {{end}}
-
+        <div class="aui-card-list-user-name">
+            <div>用户{{.meData.UserId}}</div>
+            <small>排名：{{.meData.Position}}</small>
         </div>
+        <div class="aui-card-list-user-info">奖励：{{.meData.Value}}</div>
     </div>
+    {{else}}
+
+        <div class="aui-card-list-user-name">
+            <div>昨日奖励</div>
+            <small>阅读天数：{{.meData.Day}}</small>
+        </div>
+        <div class="aui-card-list-user-info">
+            距离享受分成成还有：{{.meData.Day2}}</div>
+    </div>
+
+    {{end}}
+
+    </div>
+</div>
 </div>
 
 
