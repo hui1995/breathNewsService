@@ -47,6 +47,10 @@ func GetTodayRank(userId int) ([]TodayInfo, TodayInfo) {
 	var todayInfo TodayInfo
 
 	if userId == 0 {
+		todayInfo.IsMe = false
+		todayInfo.Day = 0
+		todayInfo.UserId = userId
+		todayInfo.Day2 = 7
 		return todayInfos, todayInfo
 	}
 
